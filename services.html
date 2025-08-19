@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services — BridgeByte Tech</title>
+  <meta name="color-scheme" content="dark" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1030; --bg-2:#0b1030; --text:#e8f2ff; --muted:#9bb3d1;
+      --primary:#49e1ff; --secondary:#a77bff; --accent:#ff77d5;
+      --panel:rgba(255,255,255,.06); --border:rgba(255,255,255,.14);
+      --radius:18px; --container:1180px; --glass:14px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--text); font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(1500px 1100px at 10% 10%, #0a1140 0%, transparent 60%),
+        radial-gradient(1200px 900px at 90% 20%, #1a0e4d 0%, transparent 65%),
+        linear-gradient(180deg, var(--bg-2), var(--bg));
+      overflow-x:hidden; scroll-behavior:smooth;
+    }
+    body::after{content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>')}
+    .container{width:100%; max-width:var(--container); margin-inline:auto; padding-inline:20px}
+    .progress{position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent)); z-index:999}
+    .cursor-glow{position:fixed; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle at center, rgba(73,225,255,.20), rgba(167,123,255,.15) 40%, rgba(255,119,213,.12) 60%, transparent 70%); pointer-events:none; mix-blend-mode:screen; filter:blur(22px); transform:translate(-50%,-50%); z-index:2}
+    #particles{position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.65}
+    header{position:sticky; top:0; z-index:60; backdrop-filter: blur(var(--glass)) saturate(140%); background:linear-gradient(180deg,rgba(8,13,38,.75),rgba(8,13,38,.45)); border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{height:72px; display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:800}
+    .logo{width:36px; height:36px; border-radius:10px; background:radial-gradient(120% 120% at 0% 100%, var(--secondary), transparent 60%), radial-gradient(120% 120% at 100% 0%, var(--primary), transparent 60%), #0a0f2c}
+    nav ul{display:flex; gap:20px; list-style:none; margin:0; padding:0; align-items:center}
+    nav a{color:var(--text); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:10px; opacity:.86; transition:.25s}
+    nav a:hover{opacity:1; background:rgba(255,255,255,.06)}
+    .cta{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#06101e; padding:10px 16px; border-radius:12px; font-weight:800; border:0; cursor:pointer}
+    .menu-btn{display:none; background:transparent; border:0; color:var(--text); font-size:24px}
+    .tagline-bar{border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08); background:transparent}
+    .tagline{display:flex; gap:8px; align-items:center; padding:10px 0; color:#d4eaff; font-weight:700; font-size:13px}
+    .hero{padding:70px 0 40px}
+    h1{margin:0 0 8px; font-size:clamp(32px,4.8vw,56px)}
+    .lead{color:var(--muted); max-width:70ch}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:26px}
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:20px; box-shadow:var(--shadow)}
+    .icon{width:54px; height:54px; border-radius:14px; background:linear-gradient(140deg, rgba(73,225,255,.24), rgba(167,123,255,.24)); display:grid; place-items:center; margin-bottom:10px}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:#d9eaff; font-size:12px}
+    .learn{display:inline-flex; gap:6px; align-items:center; margin-top:12px; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:#cfe9ff; text-decoration:none; transition:.2s}
+    .learn:hover{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#061222; transform:translateY(-2px)}
+    .cta-row{display:flex; gap:12px; margin-top:18px}
+    .btn{padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text); text-decoration:none; font-weight:800; transition:.2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#06101e; border-color:transparent}
+    footer{padding:26px 0; color:#98a9c6; font-size:13px; display:flex; justify-content:space-between}
+    .progress,.reveal,.split .word{will-change:transform,opacity}
+    .reveal{opacity:0; transform:translateY(14px); transition:.7s cubic-bezier(.2,.6,.2,1)}
+    .reveal.show{opacity:1; transform:none}
+    .split .word{opacity:0; transform:translateY(10px); transition:.5s}
+    .split.show .word{opacity:1; transform:none}
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr} nav ul{display:none} .menu-btn{display:block}}
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <canvas id="particles"></canvas>
+
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo"></div><span style="font-family:'Space Grotesk',sans-serif">BridgeByte Tech</span></div>
+      <nav>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a class="active" href="services.html">Services</a></li>
+          <li><a href="product.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="insight.html">Insights</a></li>
+          <li><a class="cta" href="contact.html"><i class="ri-send-plane-2-line"></i> Get Proposal</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn"><i class="ri-menu-line"></i></button>
+    </div>
+  </header>
+
+  <div class="tagline-bar">
+    <div class="container">
+      <div class="tagline"><i class="ri-sparkling-line"></i> LET’S INTRODUCE SOMETHING NEW</div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="reveal">All Services</h1>
+      <p class="lead split">Choose the capability you need — or combine multiple to ship end‑to‑end products with speed and confidence.</p>
+      <div class="cta-row reveal">
+        <a class="btn primary" href="contact.html"><i class="ri-rocket-2-line"></i> Start a project</a>
+        <a class="btn" href="collaborators.html"><i class="ri-slideshow-3-line"></i> See collaborations</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid">
+        <div class="card reveal">
+          <div class="icon"><i class="ri-palette-2-line"></i></div>
+          <h3>UI/UX Design</h3>
+          <p>Create delightful, accessible interfaces with research‑driven design systems and prototypes.</p>
+          <div class="chip"><i class="ri-tools-line"></i> Figma • Tokens • Motion</div>
+          <a class="learn" href="ui-ux.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon"><i class="ri-layout-2-line"></i></div>
+          <h3>Web Apps</h3>
+          <p>Next.js + TypeScript apps with SSR/ISR, accessibility, analytics, and SEO built‑in.</p>
+          <div class="chip"><i class="ri-code-s-slash-line"></i> React • Next.js • TS</div>
+          <a class="learn" href="web-apps.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon"><i class="ri-smartphone-line"></i></div>
+          <h3>Mobile Apps</h3>
+          <p>Flutter/Kotlin apps with native feel, offline‑first data, clean architecture, and CI/CD.</p>
+          <div class="chip"><i class="ri-android-line"></i> Flutter • Kotlin</div>
+          <a class="learn" href="mobile.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon"><i class="ri-cloud-line"></i></div>
+          <h3>Cloud & DevOps</h3>
+          <p>AWS/GCP/Azure, Terraform, Docker/K8s, observability, and cost optimization.</p>
+          <div class="chip"><i class="ri-stackshare-line"></i> IaC • CI/CD • SRE</div>
+          <a class="learn" href="cloud-devops.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon"><i class="ri-database-2-line"></i></div>
+          <h3>APIs & Platforms</h3>
+          <p>Secure REST/GraphQL, microservices, event‑driven systems with strong tests.</p>
+          <div class="chip"><i class="ri-exchange-line"></i> Node • Java/Kotlin • Kafka</div>
+          <a class="learn" href="apis-platforms.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon"><i class="ri-brain-line"></i></div>
+          <h3>AI & Automation</h3>
+          <p>LLM integrations, RAG, workflow automation, and smart internal tools.</p>
+          <div class="chip"><i class="ri-cpu-line"></i> LLM • Vector DB • Agents</div>
+          <a class="learn" href="ai-automation.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon"><i class="ri-shield-check-line"></i></div>
+          <h3>QA & Security</h3>
+          <p>Automation suites, performance budgets, SAST/DAST, secure SDLC.</p>
+          <div class="chip"><i class="ri-bug-line"></i> Cypress • Playwright • OWASP</div>
+          <a class="learn" href="qa-security.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="card reveal">
+          <div class="icon"><i class="ri-lightbulb-line"></i></div>
+          <h3>Tech Consulting</h3>
+          <p>Audits, architecture, roadmaps, and team enablement tailored to outcomes.</p>
+          <div class="chip"><i class="ri-compasses-2-line"></i> Audits • Roadmaps</div>
+          <a class="learn" href="consulting.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>© <span id="year"></span> BridgeByte Tech</div>
+    <div><a style="color:#adc0df; text-decoration:none" href="contact.html">Contact</a></div>
+  </footer>
+
+  <script>
+    const qs=s=>document.querySelector(s),qsa=s=>document.querySelectorAll(s);
+    document.getElementById('year').textContent=new Date().getFullYear();
+    // progress
+    const progress=qs('#progress'); addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight; progress.style.width=(scrollY/m)*100+'%'});
+    // cursor glow
+    const glow=document.getElementById('cursorGlow'); let gx=innerWidth/2,gy=innerHeight/2,tx=gx,ty=gy;
+    function loop(){gx+=(tx-gx)*.12; gy+=(ty-gy)*.12; glow.style.transform=`translate(${gx-130}px, ${gy-130}px)`; requestAnimationFrame(loop)}; loop();
+    addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY});
+    // particles
+    const c=document.getElementById('particles'),ctx=c.getContext('2d'); let W,H,DPR,stars=[];
+    function resize(){DPR=Math.min(devicePixelRatio||1,2); W=c.width=innerWidth*DPR; H=c.height=innerHeight*DPR; c.style.width=innerWidth+'px'; c.style.height=innerHeight+'px'; stars=new Array(Math.min(200,Math.floor((innerWidth*innerHeight)/9000))).fill(0).map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.6+.4}))}
+    function draw(){ctx.clearRect(0,0,W,H); for(const s of stars){s.x+=s.vx; s.y+=s.vy; if(s.x<0)s.x=W; if(s.x>W)s.x=0; if(s.y<0)s.y=H; if(s.y>H)s.y=0; const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5); g.addColorStop(0,'rgba(255,255,255,.9)'); g.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill()} requestAnimationFrame(draw)}
+    resize(); draw(); addEventListener('resize',resize);
+    // reveal + split
+    if('IntersectionObserver'in window){
+      const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show'); io.unobserve(e.target)}}),{threshold:.15});
+      qsa('.reveal').forEach(el=>io.observe(el));
+      qsa('.split').forEach(el=>{const ws=el.textContent.trim().split(' '); el.textContent=''; ws.forEach((w,i)=>{const s=document.createElement('span'); s.className='word'; s.style.transitionDelay=(i*18)+'ms'; s.textContent=w+(i<ws.length-1?' ':''); el.appendChild(s)}); io.observe(el)});
+    }
+    // mobile nav
+    const btn=document.querySelector('.menu-btn'); const panel=document.createElement('div');
+    panel.className='mobile-nav container'; panel.innerHTML = `
+      <a href="index.html#home">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="product.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a class="active" href="insights.html">Insights</a>
+      <a class="cta" href="contact.html">Get Proposal</a>`; document.body.appendChild(panel);
+    btn.addEventListener('click',()=>panel.classList.toggle('open'));
+    panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>panel.classList.remove('open')));
+  </script>
+</body>
+</html>

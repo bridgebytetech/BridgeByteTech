@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Insights — BridgeByte Tech</title>
+  <meta name="description" content="Engineering, design, DevOps and product insights from BridgeByte Tech. Guides, case notes and best practices." />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#0b1030; --bg-2:#0b1030; --text:#e8f2ff; --muted:#9bb3d1;
+      --primary:#49e1ff; --secondary:#a77bff; --accent:#ff77d5;
+      --success:#39e7b1;
+      --panel:rgba(255,255,255,.06); --border:rgba(255,255,255,.14);
+      --radius:18px; --container:1180px; --glass:14px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      /* ONE uniform background across the whole page */
+      background:
+        radial-gradient(1500px 1100px at 10% 10%, #0a1140 0%, transparent 60%),
+        radial-gradient(1200px 900px at 90% 20%, #1a0e4d 0%, transparent 65%),
+        linear-gradient(180deg, var(--bg-2), var(--bg));
+      overflow-x:hidden; scroll-behavior:smooth;
+    }
+    p{line-height:1.8; margin:0 0 14px}
+
+    /* Subtle noise overlay */
+    body::after{content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>')}
+
+    .container{width:100%; max-width:var(--container); margin-inline:auto; padding-inline:20px}
+
+    /* Progress + cursor glow + particles */
+    .progress{position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent)); z-index:999}
+    .cursor-glow{position:fixed; width:260px; height:260px; border-radius:50%;
+      background:radial-gradient(circle at center, rgba(73,225,255,.20), rgba(167,123,255,.15) 40%, rgba(255,119,213,.12) 60%, transparent 70%);
+      pointer-events:none; mix-blend-mode:screen; filter:blur(22px); transform:translate(-50%,-50%); z-index:2}
+    #particles{position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.65}
+
+    /* Header / Nav */
+    header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(var(--glass)) saturate(140%);
+      background: linear-gradient(180deg, rgba(8,13,38,.75), rgba(8,13,38,.45));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{height:72px; display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+    .logo{width:36px; height:36px; border-radius:10px;
+      background: radial-gradient(120% 120% at 0% 100%, var(--secondary), transparent 60%),
+                  radial-gradient(120% 120% at 100% 0%, var(--primary), transparent 60%), #0a0f2c}
+    nav ul{display:flex; gap:20px; list-style:none; margin:0; padding:0; align-items:center}
+    nav a{color:var(--text); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:10px; opacity:.86; transition:all .25s}
+    nav a:hover{opacity:1; background:rgba(255,255,255,.06)}
+    nav a.active{background:linear-gradient(90deg, rgba(73,225,255,.22), rgba(167,123,255,.22)); border:1px solid rgba(255,255,255,.12)}
+    .cta{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#06101e; padding:10px 16px; border-radius:12px; font-weight:800; border:0; cursor:pointer}
+    .menu-btn{display:none; background:transparent; border:0; color:var(--text); font-size:24px}
+
+    /* Tagline (transparent to keep one background) */
+    .tagline-bar{background:transparent}
+    .tagline{display:flex; gap:8px; align-items:center; padding:10px 0; color:#d4eaff; font-weight:700; font-size:13px}
+    .tagline i{color:var(--primary)}
+
+    /* Mobile nav panel */
+    .mobile-nav{display:none; position:fixed; inset:72px 10px auto; background:rgba(8,13,38,.95); backdrop-filter: blur(var(--glass));
+      border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:12px; z-index:80}
+    .mobile-nav.open{display:block}
+    .mobile-nav a{display:block; padding:12px; border-radius:10px; color:var(--text); text-decoration:none}
+
+    /* Sections */
+    section{padding:100px 0}
+    .section-title{ text-align:center; margin-bottom:12px; font-size:clamp(24px,2.8vw,34px); font-weight:800;
+      background:linear-gradient(90deg, #d9eaff, #9fe8ff 35%, #d3b6ff 70%, #ffd1f3 100%); -webkit-background-clip:text; color:transparent}
+    .lead{color:var(--muted); text-align:center; max-width:76ch; margin:0 auto 30px}
+
+    /* Hero row */
+    .hero{padding:70px 0 30px}
+    h1{margin:0 0 6px; font-size:clamp(32px,4.8vw,56px)}
+    .filters{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:#d9eaff; font-size:12px; cursor:pointer; transition:.2s}
+    .chip:hover{transform:translateY(-2px)}
+    .chip.active{background:linear-gradient(90deg, var(--primary), var(--secondary)); color:#061220; border-color:transparent}
+
+    .searchbar{margin-top:14px; display:flex; gap:10px; align-items:center}
+    .search{flex:1; display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12)}
+    .search input{flex:1; background:transparent; border:0; outline:0; color:var(--text); font:inherit}
+
+    /* Featured grid */
+    .featured{display:grid; grid-template-columns: 1.2fr .9fr .9fr; gap:18px}
+    .shot{border-radius:18px; border:1px solid rgba(255,255,255,.14); overflow:hidden; aspect-ratio: 16/10;
+      background: radial-gradient(80% 80% at 20% 20%, rgba(73,225,255,.28), transparent 60%), radial-gradient(80% 80% at 80% 80%, rgba(167,123,255,.26), transparent 60%), linear-gradient(180deg, #0b1240, #0d1033)}
+    .badge{display:inline-flex; align-items:center; gap:6px; font-size:11px; padding:6px 8px; border-radius:999px; background:rgba(67,242,192,.18); border:1px solid rgba(67,242,192,.3); color:#dfffee; margin-bottom:6px}
+    .featured .card{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:16px; display:grid; gap:10px}
+
+    /* Posts grid */
+    .posts{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:24px}
+    .post-card{background:var(--panel); border:1px solid var(--border); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; transition:.2s}
+    .post-card:hover{transform:translateY(-3px)}
+    .thumb{aspect-ratio: 16/9; background: radial-gradient(80% 80% at 20% 20%, rgba(73,225,255,.28), transparent 60%), radial-gradient(80% 80% at 80% 80%, rgba(167,123,255,.26), transparent 60%), linear-gradient(180deg, #0b1240, #0d1033); border-bottom:1px solid rgba(255,255,255,.12)}
+    .content{padding:14px 16px}
+    .meta{display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:12px; color:#b8c9e1; margin-top:6px}
+    .tag{display:inline-flex; gap:6px; align-items:center; padding:4px 8px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); font-size:11px; color:#cfe0ff}
+    .read{display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:#cfe9ff; text-decoration:none; margin-top:10px}
+    .read:hover{background:linear-gradient(90deg, var(--primary), var(--secondary)); color:#061222}
+
+    /* Sidebar panels */
+    .two-col{display:grid; grid-template-columns:1fr .8fr; gap:18px; align-items:start}
+    .panel{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:18px; box-shadow:var(--shadow)}
+    .list{display:grid; gap:10px}
+    .list a{color:#d9eaff; text-decoration:none}
+    .list a:hover{color:#061222; background:linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+    /* Newsletter */
+    .newsletter{display:grid; grid-template-columns: 1fr .9fr; gap:18px; align-items:center}
+    .nl-form{display:flex; gap:10px; flex-wrap:wrap}
+    .input{flex:1; min-width:220px; padding:12px 14px; border-radius:12px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--text); outline:0}
+    .btn{padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text); text-decoration:none; font-weight:800; transition:.2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#06101e; border-color:transparent}
+
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(14px); transition:.7s cubic-bezier(.2,.6,.2,1)}
+    .reveal.show{opacity:1; transform:none}
+    .split .word{opacity:0; transform:translateY(10px); transition:.5s}
+    .split.show .word{opacity:1; transform:none}
+
+    footer{padding:26px 0; color:#98a9c6; font-size:13px; display:flex; justify-content:space-between}
+    .footer-links a{color:#adc0df; text-decoration:none}
+
+    @media (max-width:1180px){
+      .featured{grid-template-columns:1fr 1fr}
+      .newsletter{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+    }
+    @media (max-width:880px){
+      .posts{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      nav ul{display:none} .menu-btn{display:block}
+      .posts{grid-template-columns:1fr}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .reveal{transition:none}
+      .btn:hover,.chip:hover,.read:hover{transform:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <canvas id="particles"></canvas>
+
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo"></div><span style="font-family:'Space Grotesk',sans-serif">BridgeByte Tech</span></div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="product.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a class="active" href="insight.html">Insights</a></li>
+          <li><a class="cta" href="contact.html"><i class="ri-send-plane-2-line"></i> Get Proposal</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" aria-label="Open menu"><i class="ri-menu-line"></i></button>
+    </div>
+  </header>
+
+  <!-- Tagline -->
+  <div class="tagline-bar">
+    <div class="container">
+      <div class="tagline"><i class="ri-sparkling-line"></i> LET’S INTRODUCE SOMETHING NEW</div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <h1 class="reveal">Insights & resources</h1>
+      <p class="lead split">Engineering, design, DevOps and product notes from our day‑to‑day — practical guides, architecture choices, and lessons learned.</p>
+
+      <div class="filters reveal" id="filters">
+        <span class="chip active" data-filter="">All</span>
+        <span class="chip" data-filter="Engineering"><i class="ri-code-s-slash-line"></i> Engineering</span>
+        <span class="chip" data-filter="Design"><i class="ri-palette-2-line"></i> Design</span>
+        <span class="chip" data-filter="DevOps"><i class="ri-cloud-line"></i> DevOps</span>
+        <span class="chip" data-filter="Product"><i class="ri-rocket-line"></i> Product</span>
+        <span class="chip" data-filter="AI"><i class="ri-brain-line"></i> AI</span>
+      </div>
+
+      <div class="searchbar reveal">
+        <div class="search"><i class="ri-search-line"></i><input id="searchInput" type="search" placeholder="Search articles, tags, topics..." /></div>
+        <span id="resultCount" style="font-size:13px; color:#b8c9e1">Showing all</span>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section>
+      <div class="featured">
+        <article class="card reveal">
+          <div class="shot" aria-hidden="true"></div>
+          <div>
+            <span class="badge"><i class="ri-fire-line"></i> Featured · Engineering</span>
+            <h3 class="title">How we build performant Next.js apps</h3>
+            <p class="excerpt">A practical checklist: routing strategy, image optimization, script loading, caching, and profiling to stay 95+ on Lighthouse.</p>
+            <div class="meta"><span>Updated · 2025-03-11</span><span class="readingTime">· 7 min</span><span class="tag">#react</span><span class="tag">#nextjs</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="shot" aria-hidden="true"></div>
+          <div>
+            <span class="badge"><i class="ri-brush-2-line"></i> Featured · Design</span>
+            <h3 class="title">Design tokens that actually scale</h3>
+            <p class="excerpt">From colors to spacing and motion — tokenized systems reduce drift and speed up delivery.</p>
+            <div class="meta"><span>2025-02-20</span><span class="readingTime">· 5 min</span><span class="tag">#design</span><span class="tag">#tokens</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="shot" aria-hidden="true"></div>
+          <div>
+            <span class="badge"><i class="ri-settings-4-line"></i> Featured · DevOps</span>
+            <h3 class="title">Monolith to microservices — pragmatically</h3>
+            <p class="excerpt">A migration path that avoids chaos: bounded contexts, strangler pattern, and golden signals.</p>
+            <div class="meta"><span>2025-01-18</span><span class="readingTime">· 6 min</span><span class="tag">#devops</span><span class="tag">#k8s</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- GRID + SIDEBAR -->
+    <section class="two-col">
+      <div>
+        <div class="posts" id="posts">
+          <!-- Post cards (filterable) -->
+          <article class="post-card reveal" data-category="Product" data-tags="sylhet,sylhetpedia,product,bangla" data-date="2025-03-24" data-words="820">
+            <div class="thumb" aria-hidden="true"></div>
+            <div class="content">
+              <span class="badge">Product</span>
+              <h3 class="title">SylhetPedia: building a Bangla‑first directory</h3>
+              <p class="excerpt">What it took to make a local A–Z app truly useful — content model, search, and a Bangla‑first experience.</p>
+              <div class="meta"><span>2025-03-24</span><span class="readingTime">· 4 min</span><span class="tag">#sylhet</span><span class="tag">#bangla</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="DevOps" data-tags="ci,cicd,git,deploy" data-date="2025-02-28" data-words="1240">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">DevOps</span>
+              <h3 class="title">Shipping faster with CI/CD — a practical guide</h3>
+              <p class="excerpt">Branching strategy, pipeline stages, and environment policies that keep quality high and releases predictable.</p>
+              <div class="meta"><span>2025-02-28</span><span class="readingTime">· 6 min</span><span class="tag">#ci</span><span class="tag">#cd</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="AI" data-tags="rag,ai,search,llm" data-date="2025-02-09" data-words="1430">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">AI</span>
+              <h3 class="title">RAG for internal knowledge search</h3>
+              <p class="excerpt">A simple, reliable retrieval pipeline for onboarding docs, specs, and decisions — with guardrails.</p>
+              <div class="meta"><span>2025-02-09</span><span class="readingTime">· 7 min</span><span class="tag">#rag</span><span class="tag">#llm</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="Engineering" data-tags="flutter,architecture,patterns" data-date="2025-01-29" data-words="1100">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">Engineering</span>
+              <h3 class="title">Flutter patterns we actually use</h3>
+              <p class="excerpt">Clean architecture, state management, and testing strategies that scale with your app.</p>
+              <div class="meta"><span>2025-01-29</span><span class="readingTime">· 6 min</span><span class="tag">#flutter</span><span class="tag">#mobile</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="Engineering" data-tags="spring,security,api" data-date="2025-01-08" data-words="980">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">Engineering</span>
+              <h3 class="title">Hardening Spring Boot APIs</h3>
+              <p class="excerpt">From authentication and validation to rate limits, logging, and secrets management.</p>
+              <div class="meta"><span>2025-01-08</span><span class="readingTime">· 5 min</span><span class="tag">#spring</span><span class="tag">#security</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="DevOps" data-tags="observability,logs,tracing,metrics" data-date="2024-12-12" data-words="1520">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">DevOps</span>
+              <h3 class="title">Observability 101: metrics, logs, tracing</h3>
+              <p class="excerpt">Golden signals, sampling, and dashboards that help you diagnose fast.</p>
+              <div class="meta"><span>2024-12-12</span><span class="readingTime">· 8 min</span><span class="tag">#sre</span><span class="tag">#kpis</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="Design" data-tags="accessibility,forms,ux" data-date="2024-11-25" data-words="760">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">Design</span>
+              <h3 class="title">Designing accessible forms</h3>
+              <p class="excerpt">Labels, errors, focus, and keyboard journeys — practical a11y patterns that make forms usable.</p>
+              <div class="meta"><span>2024-11-25</span><span class="readingTime">· 4 min</span><span class="tag">#a11y</span><span class="tag">#ux</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="Product" data-tags="roadmap,discovery,metrics" data-date="2024-11-02" data-words="1010">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">Product</span>
+              <h3 class="title">Roadmaps that move the needle</h3>
+              <p class="excerpt">Define outcomes, not features. Short cycles, strong metrics, and clear trade‑offs.</p>
+              <div class="meta"><span>2024-11-02</span><span class="readingTime">· 5 min</span><span class="tag">#product</span><span class="tag">#roadmap</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+
+          <article class="post-card reveal" data-category="AI" data-tags="prompt,eval,guardrails" data-date="2024-10-18" data-words="870">
+            <div class="thumb"></div>
+            <div class="content">
+              <span class="badge">AI</span>
+              <h3 class="title">Prompting and evaluation basics</h3>
+              <p class="excerpt">Structure prompts, measure quality, and set guardrails for safe outputs.</p>
+              <div class="meta"><span>2024-10-18</span><span class="readingTime">· 4 min</span><span class="tag">#prompt</span><span class="tag">#eval</span></div>
+              <a class="read" href="#"><i class="ri-arrow-right-up-line"></i> Read more</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="panel reveal">
+        <h3 style="margin:0 0 8px">Categories</h3>
+        <div class="filters" id="sideFilters">
+          <span class="chip active" data-filter="">All</span>
+          <span class="chip" data-filter="Engineering">Engineering</span>
+          <span class="chip" data-filter="Design">Design</span>
+          <span class="chip" data-filter="DevOps">DevOps</span>
+          <span class="chip" data-filter="Product">Product</span>
+          <span class="chip" data-filter="AI">AI</span>
+        </div>
+
+        <div style="height:14px"></div>
+        <h3 style="margin:0 0 8px">Popular tags</h3>
+        <div class="filters" id="tagFilters">
+          <span class="chip" data-tag="nextjs">#nextjs</span>
+          <span class="chip" data-tag="react">#react</span>
+          <span class="chip" data-tag="spring">#spring</span>
+          <span class="chip" data-tag="flutter">#flutter</span>
+          <span class="chip" data-tag="rag">#rag</span>
+          <span class="chip" data-tag="a11y">#a11y</span>
+          <span class="chip" data-tag="roadmap">#roadmap</span>
+        </div>
+
+        <div style="height:14px"></div>
+        <h3 style="margin:0 0 8px">Most read</h3>
+        <div class="list">
+          <a href="#"><i class="ri-arrow-right-s-line"></i> How we build performant Next.js apps</a>
+          <a href="#"><i class="ri-arrow-right-s-line"></i> Monolith to microservices — pragmatically</a>
+          <a href="#"><i class="ri-arrow-right-s-line"></i> RAG for internal knowledge search</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="panel newsletter reveal">
+      <div>
+        <h2 class="section-title" style="margin-bottom:8px">Get new posts in your inbox</h2>
+        <p class="lead" style="text-align:left">No spam — just practical notes, once or twice a month.</p>
+      </div>
+      <form class="nl-form" id="nlForm" novalidate>
+        <input class="input" type="email" id="nlEmail" placeholder="Your email address" required />
+        <button class="btn primary" type="submit"><i class="ri-mail-send-line"></i> Subscribe</button>
+        <span id="nlMsg" class="lead" style="font-size:13px; margin:0; color:#b8c9e1"></span>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>© <span id="year"></span> BridgeByte Tech</div>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const qs = s => document.querySelector(s), qsa = s => document.querySelectorAll(s);
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll progress
+    const progress = qs('#progress');
+    addEventListener('scroll', ()=>{
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = (scrollY / max) * 100 + '%';
+    });
+
+    // Cursor glow
+    const glow = qs('#cursorGlow'); let gx = innerWidth/2, gy = innerHeight/2, tx = gx, ty = gy;
+    function loop(){ gx += (tx-gx)*.12; gy += (ty-gy)*.12; glow.style.transform = `translate(${gx-130}px, ${gy-130}px)`; requestAnimationFrame(loop); }
+    loop(); addEventListener('pointermove', e=> { tx = e.clientX; ty = e.clientY; });
+
+    // Particles
+    const canvas = document.getElementById('particles'); const ctx = canvas.getContext('2d');
+    let W,H,DPR,stars=[];
+    function resize(){
+      DPR = Math.min(devicePixelRatio||1,2);
+      W = canvas.width = innerWidth * DPR; H = canvas.height = innerHeight * DPR;
+      canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
+      stars = new Array(Math.min(220, Math.floor((innerWidth*innerHeight)/9000)))
+        .fill(0).map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.6+.4}));
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(const s of stars){
+        s.x += s.vx; s.y += s.vy;
+        if(s.x<0) s.x=W; if(s.x>W) s.x=0; if(s.y<0) s.y=H; if(s.y>H) s.y=0;
+        const g = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5);
+        g.addColorStop(0,'rgba(255,255,255,.9)'); g.addColorStop(1,'rgba(255,255,255,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    resize(); draw(); addEventListener('resize', resize);
+
+    // Reveal + split text
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(es=> es.forEach(e=> { if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} }), {threshold:.15});
+      qsa('.reveal').forEach(el=> io.observe(el));
+      qsa('.split').forEach(el=>{
+        const words = el.textContent.trim().split(' ');
+        el.textContent = '';
+        words.forEach((w,i)=>{ const s = document.createElement('span'); s.className='word'; s.style.transitionDelay=(i*18)+'ms'; s.textContent = w + (i<words.length-1?' ':''); el.appendChild(s); });
+        io.observe(el);
+      });
+    }
+
+    // Compute reading time from data-words
+    qsa('.post-card').forEach(card=>{
+      const words = +card.dataset.words || 800;
+      const mins = Math.max(1, Math.ceil(words / 200));
+      const rt = card.querySelector('.readingTime'); if(rt) rt.textContent = `· ${mins} min`;
+    });
+
+    // Filters + Search
+    const posts = [...qsa('.post-card')];
+    const resultCount = qs('#resultCount');
+    let activeCategory = '';
+    let activeTag = '';
+    const chips = [...qsa('#filters .chip'), ...qsa('#sideFilters .chip')];
+    chips.forEach(ch => ch.addEventListener('click', ()=>{
+      chips.forEach(c=> c.classList.remove('active'));
+      // sync both bars when same filter clicked
+      const value = ch.dataset.filter || '';
+      activeCategory = value;
+      qsa(`[data-filter="${value}"]`).forEach(c=> c.classList.add('active'));
+      if(value==='') qsa('[data-filter=""]').forEach(c=> c.classList.add('active'));
+      applyFilters();
+    }));
+
+    qsa('#tagFilters .chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        // toggle tag
+        activeTag = (activeTag === chip.dataset.tag) ? '' : chip.dataset.tag;
+        qsa('#tagFilters .chip').forEach(c=> c.classList.remove('active'));
+        if(activeTag) chip.classList.add('active');
+        applyFilters();
+      });
+    });
+
+    const searchInput = qs('#searchInput');
+    searchInput.addEventListener('input', applyFilters);
+
+    function applyFilters(){
+      const term = searchInput.value.trim().toLowerCase();
+      let shown = 0;
+      posts.forEach(card=>{
+        const cat = card.dataset.category || '';
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const text = (card.querySelector('.title').textContent + ' ' + card.querySelector('.excerpt').textContent).toLowerCase();
+        const matchTerm = !term || text.includes(term) || tags.includes(term);
+        const matchCat = !activeCategory || cat === activeCategory;
+        const matchTag = !activeTag || tags.includes(activeTag.toLowerCase());
+        const display = matchTerm && matchCat && matchTag;
+        card.style.display = display ? '' : 'none';
+        if(display) shown++;
+      });
+      resultCount.textContent = (shown === posts.length && !searchInput.value && !activeCategory && !activeTag)
+        ? 'Showing all' : `Showing ${shown} result${shown!==1?'s':''}`;
+    }
+    applyFilters();
+
+    // Newsletter (demo)
+    const nlForm = qs('#nlForm'); const nlEmail = qs('#nlEmail'); const nlMsg = qs('#nlMsg');
+    nlForm.addEventListener('submit', e=>{
+      e.preventDefault();
+      const email = nlEmail.value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ nlMsg.textContent = 'Enter a valid email.'; nlMsg.style.color = '#ffd36e'; return; }
+      nlMsg.textContent = 'Subscribed! Please check your inbox.'; nlMsg.style.color = '#b8ffda'; nlForm.reset();
+    });
+
+    // Mobile nav panel
+    const btn = qs('.menu-btn');
+    const panel = document.createElement('div');
+    panel.className = 'mobile-nav container';
+    panel.innerHTML = `
+      <a href="index.html#home">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="product.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a class="active" href="insight.html">Insights</a>
+      <a class="cta" href="contact.html">Get Proposal</a>`;
+    document.body.appendChild(panel);
+    btn.addEventListener('click', ()=> panel.classList.toggle('open'));
+    panel.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> panel.classList.remove('open')));
+  </script>
+</body>
+</html>

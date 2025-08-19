@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collaborators — BridgeByte Tech</title>
+  <meta name="description" content="Our collaborators and partners — from local brands to global teams. Work with BridgeByte Tech to build impactful products." />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#070b22; --bg-2:#0b1030; --text:#e8f2ff; --muted:#9bb3d1;
+      --primary:#49e1ff; --secondary:#a77bff; --accent:#ff77d5; --success:#39e7b1;
+      --panel:rgba(255,255,255,.06); --border:rgba(255,255,255,.14);
+      --radius:18px; --container:1180px; --glass:14px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      /* ONE uniform background across the whole page */
+      background:
+        radial-gradient(1500px 1100px at 10% 10%, #0a1140 0%, transparent 60%),
+        radial-gradient(1200px 900px at 90% 20%, #1a0e4d 0%, transparent 65%),
+        linear-gradient(180deg, var(--bg-2), var(--bg));
+      overflow-x:hidden; scroll-behavior:smooth;
+    }
+    p{line-height:1.8; margin:0 0 14px}
+
+    /* Subtle noise overlay */
+    body::after{content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>')}
+
+    .container{width:100%; max-width:var(--container); margin-inline:auto; padding-inline:20px}
+
+    /* Progress + cursor glow + particles */
+    .progress{position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent)); z-index:999}
+    .cursor-glow{position:fixed; width:260px; height:260px; border-radius:50%;
+      background:radial-gradient(circle at center, rgba(73,225,255,.20), rgba(167,123,255,.15) 40%, rgba(255,119,213,.12) 60%, transparent 70%);
+      pointer-events:none; mix-blend-mode:screen; filter:blur(22px); transform:translate(-50%,-50%); z-index:2}
+    #particles{position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.65}
+
+    /* Header / Nav */
+    header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(var(--glass)) saturate(140%);
+      background: linear-gradient(180deg, rgba(8,13,38,.75), rgba(8,13,38,.45));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{height:72px; display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+    .logo{width:36px; height:36px; border-radius:10px;
+      background: radial-gradient(120% 120% at 0% 100%, var(--secondary), transparent 60%),
+                  radial-gradient(120% 120% at 100% 0%, var(--primary), transparent 60%), #0a0f2c}
+    nav ul{display:flex; gap:20px; list-style:none; margin:0; padding:0; align-items:center}
+    nav a{color:var(--text); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:10px; opacity:.86; transition:all .25s}
+    nav a:hover{opacity:1; background:rgba(255,255,255,.06)}
+    /* Keep existing nav items consistent with other pages */
+    nav a.active{background:linear-gradient(90deg, rgba(73,225,255,.22), rgba(167,123,255,.22)); border:1px solid rgba(255,255,255,.12)}
+    .cta{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#06101e; padding:10px 16px; border-radius:12px; font-weight:800; border:0; cursor:pointer}
+    .menu-btn{display:none; background:transparent; border:0; color:var(--text); font-size:24px}
+
+    /* Tagline (transparent to keep one background) */
+    .tagline-bar{background:transparent}
+    .tagline{display:flex; gap:8px; align-items:center; padding:10px 0; color:#d4eaff; font-weight:700; font-size:13px}
+    .tagline i{color:var(--primary)}
+
+    /* Mobile nav panel */
+    .mobile-nav{display:none; position:fixed; inset:72px 10px auto; background:rgba(8,13,38,.95); backdrop-filter: blur(var(--glass));
+      border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:12px; z-index:80}
+    .mobile-nav.open{display:block}
+    .mobile-nav a{display:block; padding:12px; border-radius:10px; color:var(--text); text-decoration:none}
+
+    /* Sections */
+    section{padding:100px 0}
+    .section-title{ text-align:center; margin-bottom:12px; font-size:clamp(24px,2.8vw,34px); font-weight:800;
+      background:linear-gradient(90deg, #d9eaff, #9fe8ff 35%, #d3b6ff 70%, #ffd1f3 100%); -webkit-background-clip:text; color:transparent}
+    .lead{color:var(--muted); text-align:center; max-width:76ch; margin:0 auto 30px}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns: 1.1fr .9fr; gap:24px; align-items:center}
+    h1{margin:0 0 10px; font-size:clamp(32px,4.8vw,56px)}
+    .eyebrow{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; font-size:12px; border-radius:999px; color:#cfe9ff; background:linear-gradient(90deg, rgba(73,225,255,.16), rgba(167,123,255,.16))}
+    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .btn{padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text); text-decoration:none; font-weight:800; transition:.2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#06101e; border-color:transparent}
+    .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px}
+    .metric{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:18px; text-align:center}
+    .metric .num{font-size:28px; font-weight:800} .metric .label{color:#b7c9e6; font-size:13px}
+
+    /* Filters + search */
+    .filters{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:#d9eaff; font-size:12px; cursor:pointer; transition:.2s}
+    .chip:hover{transform:translateY(-2px)}
+    .chip.active{background:linear-gradient(90deg, var(--primary), var(--secondary)); color:#061220; border-color:transparent}
+    .searchbar{display:flex; gap:10px; align-items:center}
+    .search{flex:1; display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12)}
+    .search input{flex:1; background:transparent; border:0; outline:0; color:var(--text); font:inherit}
+    .toolbar{display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; margin-top:18px}
+
+    /* Partner grid */
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:24px}
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:18px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:12px}
+    .logo-box{height:80px; display:grid; place-items:center; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px}
+    .logo-box img{max-height:60px; max-width:90%; height:auto; filter: drop-shadow(0 10px 24px rgba(0,0,0,.35))}
+    .row{display:flex; gap:8px; flex-wrap:wrap}
+    .tag{display:inline-flex; gap:6px; align-items:center; padding:4px 8px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); font-size:11px; color:#cfe0ff}
+    .links{display:flex; gap:10px; flex-wrap:wrap; margin-top:4px}
+    .small{font-size:12px; color:#b8c9e1}
+
+    /* Logo strip */
+    .strip{overflow:hidden; margin:16px 0}
+    .track{display:flex; gap:40px; align-items:center; white-space:nowrap; animation:scroll 26s linear infinite}
+    .strip .logo-card{display:inline-grid; place-items:center; padding:10px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06)}
+    .strip img{height:34px; filter: drop-shadow(0 6px 16px rgba(0,0,0,.35))}
+    @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* Process */
+    .process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+    .step{background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:18px}
+    .step .icon{width:54px; height:54px; border-radius:14px; background:linear-gradient(140deg, rgba(73,225,255,.24), rgba(167,123,255,.24)); display:grid; place-items:center; margin-bottom:10px}
+
+    /* CTA form */
+    .cta-panel{background: linear-gradient(90deg, rgba(73,225,255,.20), rgba(167,123,255,.20), rgba(255,119,213,.18)); border:1px solid rgba(255,255,255,.18); border-radius:22px; padding:26px; box-shadow:var(--shadow)}
+    form{display:grid; gap:12px}
+    .row-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .input,.select,textarea{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--text); border-radius:12px; padding:12px 14px; outline:0; font:inherit; width:100%}
+    textarea{min-height:120px; resize:vertical}
+    .submit{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#04101f; border:0; padding:12px 16px; border-radius:12px; font-weight:800; cursor:pointer}
+    .note{font-size:12px; color:#b8c9e1}
+    .ok{color:#b8ffda} .warn{color:#ffd36e}
+
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(14px); transition:.7s cubic-bezier(.2,.6,.2,1)}
+    .reveal.show{opacity:1; transform:none}
+
+    footer{padding:26px 0; color:#98a9c6; font-size:13px; display:flex; justify-content:space-between}
+    .footer-links a{color:#adc0df; text-decoration:none}
+
+    @media (max-width:1180px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .process-grid{grid-template-columns:repeat(2,1fr)}
+      .row-2{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      nav ul{display:none} .menu-btn{display:block}
+      .grid{grid-template-columns:1fr}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .reveal{transition:none}
+      .btn:hover,.chip:hover{transform:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <canvas id="particles"></canvas>
+
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo"></div><span style="font-family:'Space Grotesk',sans-serif">BridgeByte Tech</span></div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="product.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="insight.html">Insights</a></li>
+          <li><a class="cta" href="contact.html"><i class="ri-send-plane-2-line"></i> Get Proposal</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" aria-label="Open menu"><i class="ri-menu-line"></i></button>
+    </div>
+  </header>
+
+  <!-- Tagline (transparent to keep single background) -->
+  <div class="tagline-bar">
+    <div class="container">
+      <div class="tagline"><i class="ri-sparkling-line"></i> LET’S INTRODUCE SOMETHING NEW</div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <span class="eyebrow"><i class="ri-hand-heart-line"></i> Partnerships that multiply impact</span>
+        <h1 class="reveal">Collaborators & Partners</h1>
+        <p class="lead reveal">We team up with brands, startups, and organizations to co‑create products and experiences — from design systems and websites to end‑to‑end apps.</p>
+        <div class="actions reveal">
+          <a class="btn primary" href="#become"><i class="ri-user-add-line"></i> Become a collaborator</a>
+          <a class="btn" href="product.html"><i class="ri-apps-line"></i> See our products</a>
+        </div>
+        <div class="metrics">
+          <div class="metric reveal"><div class="num">12+</div><div class="label">Active collaborators</div></div>
+          <div class="metric reveal"><div class="num">40+</div><div class="label">Joint projects</div></div>
+          <div class="metric reveal"><div class="num">6</div><div class="label">Countries</div></div>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <h3 style="margin:0 0 8px">Logo wall</h3>
+        <div class="strip">
+          <div class="track">
+            <span class="logo-card"><img src="splogo.png" alt="SylhetPedia"></span>
+            <span class="logo-card"><img src="dflogo.png" alt="DF IT CENTRE"></span>
+            <span class="logo-card"><img src="partner-logo-1.png" alt="Partner 1"></span>
+            <span class="logo-card"><img src="partner-logo-2.png" alt="Partner 2"></span>
+            <!-- repeat for seamless loop -->
+          </div>
+        </div>
+        <p class="small">Logos shown for illustration; replace partner-logo-*.png with actual assets.</p>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <section>
+      <div class="toolbar">
+        <div class="filters" id="filters">
+          <span class="chip active" data-filter="">All</span>
+          <span class="chip" data-filter="Technology"><i class="ri-cpu-line"></i> Technology</span>
+          <span class="chip" data-filter="Design"><i class="ri-palette-2-line"></i> Design</span>
+          <span class="chip" data-filter="Community"><i class="ri-community-line"></i> Community</span>
+          <span class="chip" data-filter="Education"><i class="ri-graduation-cap-line"></i> Education</span>
+        </div>
+        <div class="searchbar">
+          <div class="search"><i class="ri-search-line"></i><input id="searchInput" type="search" placeholder="Search collaborators, tags..." /></div>
+        </div>
+      </div>
+
+      <!-- PARTNER CARDS -->
+      <div class="grid" id="partners">
+        <article class="card reveal" data-type="Technology" data-tags="website,design,development,collaboration,bd">
+          <div class="logo-box"><img src="dflogo.png" alt="DF IT CENTRE"></div>
+          <h3>DF IT CENTRE</h3>
+          <p>We collaborated to design and build a modern, high‑performance website with a clean content model and smooth admin experience.</p>
+          <div class="row">
+            <span class="tag">Technology</span><span class="tag">Design</span><span class="tag">Web</span>
+          </div>
+          <div class="links">
+            <a class="btn" href="https://www.dfitcentre.com/index.html" target="_blank" rel="noopener"><i class="ri-external-link-line"></i> Visit site</a>
+            <a class="btn" href="product.html#collabs"><i class="ri-file-list-line"></i> View note</a>
+          </div>
+        </article>
+
+        <article class="card reveal" data-type="Product" data-tags="sylhet,sylhetpedia,local,bangla,app,directory">
+          <div class="logo-box"><img src="splogo.png" alt="SylhetPedia"></div>
+          <h3>SylhetPedia</h3>
+          <p>Bangla‑first A–Z directory for Sylhet — web and mobile. We partner with local orgs to keep data accurate and useful.</p>
+          <div class="row">
+            <span class="tag">Product</span><span class="tag">Community</span><span class="tag">Bangla</span>
+          </div>
+          <div class="links">
+            <a class="btn" href="product.html"><i class="ri-apps-line"></i> Product page</a>
+            <a class="btn" href="#" target="_blank" rel="noopener"><i class="ri-external-link-line"></i> Visit</a>
+          </div>
+        </article>
+
+        <article class="card reveal" data-type="Design" data-tags="branding,uiux,system">
+          <div class="logo-box"><img src="partner-logo-1.png" alt="Partner A"></div>
+          <h3>Partner A</h3>
+          <p>Design system and brand refresh. Tokens, components, and docs to speed up delivery across teams.</p>
+          <div class="row"><span class="tag">Design</span><span class="tag">System</span></div>
+          <div class="links">
+            <a class="btn" href="#"><i class="ri-eye-line"></i> Preview</a>
+          </div>
+        </article>
+
+        <article class="card reveal" data-type="Community" data-tags="events,workshops,local,bd">
+          <div class="logo-box"><img src="partner-logo-2.png" alt="Partner B"></div>
+          <h3>Partner B</h3>
+          <p>Workshops and events for local devs and designers — practical sessions focused on fundamentals.</p>
+          <div class="row"><span class="tag">Community</span><span class="tag">Education</span></div>
+          <div class="links">
+            <a class="btn" href="#"><i class="ri-calendar-event-line"></i> Events</a>
+          </div>
+        </article>
+
+        <article class="card reveal" data-type="Education" data-tags="university,students,mentoring">
+          <div class="logo-box"><img src="partner-logo-3.png" alt="Partner C"></div>
+          <h3>Partner C</h3>
+          <p>University collaboration — mentoring, capstone reviews, and internship pipelines with real projects.</p>
+          <div class="row"><span class="tag">Education</span><span class="tag">Mentoring</span></div>
+          <div class="links"><a class="btn" href="#"><i class="ri-book-open-line"></i> Learn more</a></div>
+        </article>
+
+        <article class="card reveal" data-type="Technology" data-tags="cloud,devops,infra">
+          <div class="logo-box"><img src="partner-logo-4.png" alt="Partner D"></div>
+          <h3>Partner D</h3>
+          <p>Cloud & DevOps help — IaC, CI/CD, observability, and cost optimization for steady scale.</p>
+          <div class="row"><span class="tag">Technology</span><span class="tag">Cloud</span></div>
+          <div class="links"><a class="btn" href="#"><i class="ri-external-link-line"></i> Visit</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section>
+      <h2 class="section-title reveal">How collaboration works</h2>
+      <p class="lead reveal">Simple, transparent, and focused on outcomes.</p>
+      <div class="process-grid">
+        <div class="step reveal"><div class="icon"><i class="ri-search-eye-line"></i></div><h3>1. Discover</h3><p>Quick calls to align on goals, audience, and timelines.</p></div>
+        <div class="step reveal"><div class="icon"><i class="ri-road-map-line"></i></div><h3>2. Plan</h3><p>Scopes, deliverables, and a lightweight roadmap.</p></div>
+        <div class="step reveal"><div class="icon"><i class="ri-pen-nib-line"></i></div><h3>3. Co‑create</h3><p>Design, build, and iterate together in short cycles.</p></div>
+        <div class="step reveal"><div class="icon"><i class="ri-rocket-2-line"></i></div><h3>4. Launch</h3><p>Release, measure, and keep improving based on data.</p></div>
+      </div>
+    </section>
+
+    <!-- BECOME A COLLABORATOR -->
+    <section id="become">
+      <div class="cta-panel reveal">
+        <h2 class="section-title" style="margin-bottom:8px">Become a collaborator</h2>
+        <p class="lead" style="text-align:left">Tell us about your organization and how you’d like to collaborate. We’ll get back within 24 hours.</p>
+        <form id="collabForm" novalidate>
+          <div class="row-2">
+            <input class="input" type="text" name="name" placeholder="Your name" required />
+            <input class="input" type="email" name="email" placeholder="Email address" required />
+          </div>
+          <div class="row-2">
+            <input class="input" type="text" name="org" placeholder="Organization / Brand" required />
+            <select class="select" name="type">
+              <option value="">Collaboration type</option>
+              <option>Technology</option>
+              <option>Design</option>
+              <option>Community</option>
+              <option>Education</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <textarea class="input" name="message" placeholder="What would you like to build together?" required></textarea>
+          <button class="submit" type="submit"><i class="ri-send-plane-fill"></i> Send</button>
+          <div id="formMsg" class="note" role="status"></div>
+        </form>
+        <p class="note" style="margin-top:10px">Prefer email? Write to <a href="mailto:hello@bridgebyte.tech" style="color:#bfe3ff">hello@bridgebyte.tech</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>© <span id="year"></span> BridgeByte Tech</div>
+    <div class="footer-links"><a href="contact.html">Contact</a></div>
+  </footer>
+
+  <script>
+    const qs = s => document.querySelector(s), qsa = s => document.querySelectorAll(s);
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll progress
+    const progress = qs('#progress');
+    addEventListener('scroll', ()=>{
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = (scrollY / max) * 100 + '%';
+    });
+
+    // Cursor glow
+    const glow = qs('#cursorGlow'); let gx = innerWidth/2, gy = innerHeight/2, tx = gx, ty = gy;
+    function loop(){ gx += (tx-gx)*.12; gy += (ty-gy)*.12; glow.style.transform = `translate(${gx-130}px, ${gy-130}px)`; requestAnimationFrame(loop); }
+    loop(); addEventListener('pointermove', e=> { tx = e.clientX; ty = e.clientY; });
+
+    // Particles
+    const canvas = document.getElementById('particles'); const ctx = canvas.getContext('2d');
+    let W,H,DPR,stars=[];
+    function resize(){
+      DPR = Math.min(devicePixelRatio||1,2);
+      W = canvas.width = innerWidth * DPR; H = canvas.height = innerHeight * DPR;
+      canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
+      stars = new Array(Math.min(220, Math.floor((innerWidth*innerHeight)/9000)))
+        .fill(0).map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.6+.4}));
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(const s of stars){
+        s.x += s.vx; s.y += s.vy;
+        if(s.x<0) s.x=W; if(s.x>W) s.x=0; if(s.y<0) s.y=H; if(s.y>H) s.y=0;
+        const g = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5);
+        g.addColorStop(0,'rgba(255,255,255,.9)'); g.addColorStop(1,'rgba(255,255,255,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    resize(); draw(); addEventListener('resize', resize);
+
+    // Reveal
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(es=> es.forEach(e=> { if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} }), {threshold:.15});
+      qsa('.reveal').forEach(el=> io.observe(el));
+    }
+
+    // Filters + search
+    const items = [...qsa('#partners .card')];
+    const chips = qsa('#filters .chip');
+    const searchInput = qs('#searchInput');
+    let activeType = '';
+    chips.forEach(ch => ch.addEventListener('click', ()=>{
+      chips.forEach(c=> c.classList.remove('active'));
+      ch.classList.add('active');
+      activeType = ch.dataset.filter || '';
+      applyFilters();
+    }));
+    searchInput.addEventListener('input', applyFilters);
+
+    function applyFilters(){
+      const term = searchInput.value.trim().toLowerCase();
+      items.forEach(card=>{
+        const type = (card.dataset.type || '');
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const text = (card.querySelector('h3').textContent + ' ' + card.querySelector('p').textContent).toLowerCase();
+        const okType = !activeType || type === activeType;
+        const okTerm = !term || text.includes(term) || tags.includes(term);
+        card.style.display = (okType && okTerm) ? '' : 'none';
+      });
+    }
+    applyFilters();
+
+    // Collaborator form (demo)
+    const collabForm = qs('#collabForm'); const formMsg = qs('#formMsg');
+    collabForm.addEventListener('submit', e=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(collabForm).entries());
+      if(!data.name || !data.email || !data.org || !data.message){
+        formMsg.textContent = 'Please fill out name, email, organization, and message.'; formMsg.className='note warn'; return;
+      }
+      const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+      if(!okEmail){ formMsg.textContent = 'Enter a valid email address.'; formMsg.className='note warn'; return; }
+      formMsg.textContent = 'Thanks! We’ll get back within 24 hours.'; formMsg.className='note ok'; collabForm.reset();
+    });
+
+    // Mobile nav panel
+    const btn = qs('.menu-btn');
+    const panel = document.createElement('div');
+    panel.className = 'mobile-nav container';
+    panel.innerHTML = `
+      <a href="index.html#home">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="product.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a href="insight.html">Insights</a>
+      <a class="cta" href="contact.html">Get Proposal</a>`;
+    document.body.appendChild(panel);
+    btn.addEventListener('click', ()=> panel.classList.toggle('open'));
+    panel.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> panel.classList.remove('open')));
+  </script>
+</body>
+</html>

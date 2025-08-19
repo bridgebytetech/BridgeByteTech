@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mobile Apps — BridgeByte Tech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>    :root{--bg:#0b1030;--bg-2:#0b1030;--text:#e8f2ff;--muted:#9bb3d1;--primary:#49e1ff;--secondary:#a77bff;--accent:#ff77d5;--panel:rgba(255,255,255,.06);--border:rgba(255,255,255,.14);--radius:18px;--container:1180px;--glass:14px;--shadow:0 10px 30px rgba(0,0,0,.35)}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;color:var(--text);font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1500px 1100px at 10% 10%, #0a1140 0%, transparent 60%),radial-gradient(1200px 900px at 90% 20%, #1a0e4d 0%, transparent 65%),linear-gradient(180deg,var(--bg-2),var(--bg));overflow-x:hidden;scroll-behavior:smooth}
+    body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>')}
+    .container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:20px}
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,rgba(8,13,38,.75),rgba(8,13,38,.45));backdrop-filter:blur(var(--glass));border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{height:72px;display:flex;justify-content:space-between;align-items:center}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+    .logo{width:36px;height:36px;border-radius:10px;background:radial-gradient(120% 120% at 0% 100%, var(--secondary), transparent 60%),radial-gradient(120% 120% at 100% 0%, var(--primary), transparent 60%),#0a0f2c}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{color:var(--text);text-decoration:none;font-weight:700;padding:10px 12px;border-radius:10px;opacity:.86;transition:.25s}
+    nav a:hover{opacity:1;background:rgba(255,255,255,.06)}
+    .cta{background:linear-gradient(90deg,var(--primary),var(--secondary));color:#06101e;padding:10px 16px;border-radius:12px;font-weight:800}
+    .menu-btn{display:none;background:transparent;border:0;color:var(--text);font-size:24px}
+    .tagline-bar{border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);background:transparent}
+    .tagline{display:flex;gap:8px;align-items:center;padding:10px 0;color:#d4eaff;font-weight:700;font-size:13px}
+    .cursor-glow{position:fixed;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at center,rgba(73,225,255,.20),rgba(167,123,255,.15) 40%,rgba(255,119,213,.12) 60%,transparent 70%);pointer-events:none;mix-blend-mode:screen;filter:blur(22px);transform:translate(-50%,-50%);z-index:2}
+    #particles{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.65}
+    .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));z-index:999}
+    main{padding:70px 0}
+    h1{margin:0 0 6px;font-size:clamp(32px,4.8vw,56px)}
+    .lead{color:var(--muted);max-width:72ch}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#d9eaff;font-size:12px}
+    .btn{display:inline-flex;gap:10px;align-items:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--text);text-decoration:none;font-weight:800;transition:.2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(90deg,var(--primary),var(--secondary));color:#06101e;border-color:transparent}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .list{display:grid;gap:10px}
+    .list .item{display:flex;gap:10px;align-items:flex-start}
+    .list .item i{color:var(--success);margin-top:2px}
+    .stack{display:flex;gap:8px;flex-wrap:wrap}
+    .section{margin-top:36px}
+    .section h2{margin:0 0 10px;font-size:26px}
+    .faq details{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:12px 14px}
+    .faq details+details{margin-top:10px}
+    .faq summary{cursor:pointer;font-weight:700}
+    footer{padding:26px 0;color:#98a9c6;font-size:13px;display:flex;justify-content:space-between}
+    .reveal{opacity:0;transform:translateY(12px);transition:.7s cubic-bezier(.2,.6,.2,1)} .reveal.show{opacity:1;transform:none}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr} nav ul{display:none}.menu-btn{display:block}}</style>
+</head>
+<body>
+  <!-- Copy header/tagline/progress/cursor/particles from previous pages -->
+  <div class="progress" id="progress"></div><div class="cursor-glow" id="cursorGlow"></div><canvas id="particles"></canvas>
+  <header><div class="container nav"><div class="brand"><div class="logo"></div><span style="font-family:'Space Grotesk',sans-serif">BridgeByte Tech</span></div>
+    <nav><ul><li><a href="index.html#home">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="product.html">Products</a></li><li><a href="contact.html">Contact</a></li><li><a href="insight.html">Insights</a></li><li><a class="cta" href="contact.html">Get Proposal</a></li></ul></nav>
+    <button class="menu-btn"><i class="ri-menu-line"></i></button></div></header>
+  <div class="tagline-bar"><div class="container"><div class="tagline"><i class="ri-sparkling-line"></i> LET’S INTRODUCE SOMETHING NEW</div></div></div>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1 class="reveal"><i class="ri-smartphone-line"></i> Mobile Apps</h1>
+        <p class="lead reveal">Flutter and Kotlin apps that feel native, work offline, and scale. Clean architecture, CI/CD, analytics, and crash reporting included.</p>
+        <div class="section reveal"><a class="btn primary" href="contact.html"><i class="ri-rocket-2-line"></i> Start a project</a><a class="btn" href="services.html"><i class="ri-arrow-left-line"></i> View all services</a></div>
+      </div>
+      <div class="panel reveal">
+        <div class="stack" style="margin-bottom:10px">
+          <span class="chip">Flutter</span><span class="chip">Kotlin</span><span class="chip">Firebase</span><span class="chip">SQLite</span><span class="chip">AppCenter</span>
+        </div>
+        <div class="grid">
+          <div class="panel"><h3>What we build</h3><div class="list">
+            <div class="item"><i class="ri-checkbox-circle-line"></i><span>Cross‑platform apps with pixel‑perfect UI</span></div>
+            <div class="item"><i class="ri-checkbox-circle-line"></i><span>Offline‑first data and sync</span></div>
+            <div class="item"><i class="ri-checkbox-circle-line"></i><span>Push, deep links, and secure storage</span></div>
+          </div></div>
+          <div class="panel"><h3>Deliverables</h3><div class="list">
+            <div class="item"><i class="ri-star-smile-line"></i><span>App architecture & CI/CD pipeline</span></div>
+            <div class="item"><i class="ri-star-smile-line"></i><span>Analytics, crash reporting, and QA suite</span></div>
+            <div class="item"><i class="ri-star-smile-line"></i><span>Store release support</span></div>
+          </div></div>
+          <div class="panel"><h3>Stack</h3><div class="stack"><span class="chip">Flutter</span><span class="chip">Kotlin</span><span class="chip">GraphQL/REST</span><span class="chip">SQLite</span><span class="chip">Firebase</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq reveal">
+      <h2>FAQ</h2>
+      <details><summary>Flutter vs native?</summary><p>Flutter is great for speed and shared code. If deep native integrations are critical we can go Kotlin/Swift as needed.</p></details>
+      <details><summary>Offline‑first?</summary><p>Yes — local cache with sync strategies and conflict resolution patterns.</p></details>
+    </section>
+  </main>
+
+  <footer class="container"><div>© <span id="year"></span> BridgeByte Tech</div><div><a style="color:#adc0df;text-decoration:none" href="contact.html">Contact</a></div></footer>
+
+  <script>
+        document.getElementById('year').textContent=new Date().getFullYear();
+    const progress=document.querySelector('#progress'); addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight; progress.style.width=(scrollY/m)*100+'%'});
+    const glow=document.getElementById('cursorGlow'); let gx=innerWidth/2,gy=innerHeight/2,tx=gx,ty=gy; function loop(){gx+=(tx-gx)*.12; gy+=(ty-gy)*.12; glow.style.transform=`translate(${gx-130}px, ${gy-130}px)`; requestAnimationFrame(loop)}; loop(); addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY});
+    const c=document.getElementById('particles'),ctx=c.getContext('2d'); let W,H,DPR,stars=[];
+    function resize(){DPR=Math.min(devicePixelRatio||1,2); W=c.width=innerWidth*DPR; H=c.height=innerHeight*DPR; c.style.width=innerWidth+'px'; c.style.height=innerHeight+'px'; stars=new Array(Math.min(200,Math.floor((innerWidth*innerHeight)/9000))).fill(0).map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.6+.4}))}
+    function draw(){ctx.clearRect(0,0,W,H); for(const s of stars){s.x+=s.vx; s.y+=s.vy; if(s.x<0)s.x=W; if(s.x>W)s.x=0; if(s.y<0)s.y=H; if(s.y>H)s.y=0; const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*5); g.addColorStop(0,'rgba(255,255,255,.9)'); g.addColorStop(1,'rgba(255,255,255,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill()} requestAnimationFrame(draw)}
+    resize(); draw(); addEventListener('resize',resize);
+    if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.15}); document.querySelectorAll('.reveal').forEach(el=>io.observe(el))}
+    const btn=document.querySelector('.menu-btn'); const panel=document.createElement('div'); panel.className='mobile-nav container';     panel.innerHTML = `
+      <a href="index.html#home">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="product.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a class="active" href="insights.html">Insights</a>
+      <a class="cta" href="contact.html">Get Proposal</a>`;  document.body.appendChild(panel); btn.addEventListener('click',()=>panel.classList.toggle('open')); panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>panel.classList.remove('open')));
+  </script>
+</body>
+</html>

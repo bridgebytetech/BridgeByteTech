@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /wp-admin/
+Allow: /
+
+Sitemap: https://www.bridgebytetech.com/sitemap.xml

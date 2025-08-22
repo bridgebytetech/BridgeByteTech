@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BONGOBOLTU® — Official Trademark Registration</title>
+  <meta name="description" content="BONGOBOLTU ব্র্যান্ডের অফিসিয়াল ট্রেডমার্ক নিবন্ধন সম্পর্কিত তথ্য, সার্টিফিকেট ও লোগো।">
+  <style>
+    :root{--primary:#e30613;--text:#1f2937;--muted:#6b7280;--bg:#f6f8fa;--card:#ffffff;}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans Bengali","Hind Siliguri",Arial,sans-serif}
+    .container{max-width:980px;margin:40px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.06);padding:28px}
+    .hero{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+    .hero img.logo{width:72px;height:72px;object-fit:contain;border-radius:12px;border:1px solid #eee;background:#fff;padding:6px}
+    h1{margin:0;font-size:30px}
+    .tag{color:#fff;background:var(--primary);display:inline-block;padding:4px 10px;border-radius:999px;font-size:13px;margin-top:8px}
+    .grid{display:grid;grid-template-columns:1fr;gap:24px}
+    @media(min-width:880px){.grid{grid-template-columns:1.1fr .9fr}}
+    .certificate img{width:100%;border-radius:12px;border:1px solid #e5e7eb}
+    .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .btn{background:var(--primary);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:600}
+    .btn.secondary{background:#1118271a;color:#111}
+    .details table{width:100%;border-collapse:collapse}
+    .details th,.details td{padding:10px 12px;border-bottom:1px solid #eef2f7;text-align:left;font-size:15px}
+    .details th{width:36%;color:#374151;background:#fafafa}
+    .note{font-size:14px;color:var(--muted);margin-top:14px}
+    footer{margin-top:26px;font-size:13px;color:var(--muted);text-align:center}
+  </style>
+
+  <!-- Optional: Open Graph for nice sharing -->
+  <meta property="og:title" content="BONGOBOLTU® — Official Trademark Registration">
+  <meta property="og:description" content="BONGOBOLTU ব্র্যান্ডের অফিসিয়াল ট্রেডমার্ক সার্টিফিকেট, লোগো ও ডিটেইলস।">
+  <meta property="og:image" content="https://your-site.com/assets/yamaha-certificate.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Optional: Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"BONGOBOLTU",
+    "logo":"https://your-site.com/assets/BMFC.png",
+    "brand":{"@type":"Brand","name":"BONGOBOLTU"},
+    "url":"https://your-site.com/trademark"
+  }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="hero">
+        <img class="logo" src="BMFC.jpg" alt="BONGOBOLTU logo">
+        <div>
+          <h1>BONGOBOLTU® — Official Trademark Registration</h1>
+          <span class="tag">Registered in Bangladesh (DPDT)</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Certificate Preview -->
+        <section class="certificate">
+          <h2 style="margin-top:0">Certificate of Registration</h2>
+          <a href="trademark_copy.jpg" target="_blank" rel="noopener">
+            <img src="BMFCtrademark.jpg" alt="Trademark Certificate: BONGOBOLTU (full view)">
+          </a>
+          <div class="btns">
+            <a class="btn" href="trademark_copy.jpg" download>Download Certificate (JPG)</a>
+            <!-- If you have a PDF, replace link below -->
+            <a class="btn secondary" href="trademark_copy.jpg" target="_blank" rel="noopener">View PDF</a>
+          </div>
+          <p class="note">Click the image to view full size. For any change of ownership or address, please notify the Registrar (DPDT) immediately.</p>
+        </section>
+
+        <!-- Trademark Details -->
+        <section class="details">
+          <h2 style="margin-top:0">Trademark Details</h2>
+          <table>
+            <tr><th>Brand Name</th><td>BONGOBOLTU</td></tr>
+            <tr><th>Trademark No.</th><td>193586</td></tr>
+            <tr><th>Serial No.</th><td>57746</td></tr>
+            <tr><th>Class</th><td>35 — Business Management (and related services)</td></tr>
+            <tr><th>Status</th><td>Registered</td></tr>
+            <tr><th>Applicant / Owner</th><td>Aheen Afnan, President, BONGOBOLTU</td></tr>
+            <tr><th>Address</th><td>Maksum Mansion, 127, Motijheel C/A (4th floor), Room # 32, Dhaka-1000, Bangladesh</td></tr>
+            <tr><th>Issuing Authority</th><td>Department of Patents, Designs and Trademarks (DPDT), Ministry of Industries, Bangladesh</td></tr>
+            <tr><th>Effective From</th><td>09/09/2014</td></tr>
+            <tr><th>Registration Date</th><td>09/09/2014</td></tr>
+            <tr><th>Certificate Sealed On</th><td>09/09/2014</td></tr>
+            <tr><th>Validity</th><td>15 years from registration date (up to approx. 09/09/2029), renewable in 15‑year periods thereafter (as per Trademarks Act, 2009)</td></tr>
+            <tr><th>Remarks</th><td>This certificate is not for legal proceeding or for obtaining registration abroad.</td></tr>
+          </table>
+          <p class="note">
+            Verification: For official verification or renewal guidance, please contact DPDT (Bangladesh). Keep the original certificate safely preserved.
+          </p>
+        </section>
+      </div>
+
+      <footer>
+        © <span id="yr"></span> BONGOBOLTU — All Rights Reserved · Last updated: <span id="updated"></span>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    document.getElementById('updated').textContent = new Date().toLocaleDateString('bn-BD');
+  </script>
+</body>
+
+</html>
+

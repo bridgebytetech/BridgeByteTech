@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RSway — Smart Shopping</title>
+  <meta name="description" content="RSway e-commerce. Fast delivery, easy returns, best deals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue:#2387F5;
+      --red:#E2252F;
+      --bg:#F6F8FB;
+      --text:#0E1117;
+      --muted:#475569;
+      --soft:#E2E8F0;
+      --white:#fff;
+      --shadow:0 8px 24px rgba(2,6,23,.06);
+      --radius:12px;
+      --radius-lg:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background: radial-gradient(1000px 500px at 10% -10%, #ffffff, transparent 60%), linear-gradient(180deg, #FAFCFF 0%, var(--bg) 100%);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px}
+    .topbar{background:#0b1220;color:#e2e8f0}
+    .topbar .container{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:6px 16px;font-size:12px}
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #e5e7eb}
+    .header-wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    .logo{font-family:Poppins,Inter;font-weight:700;font-size:26px;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+    .logo .cartmark{color:var(--red);font-size:22px}
+    .search{flex:1;display:flex;align-items:center;gap:8px}
+    .search input{
+      width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:999px;
+      outline:none;transition:.2s;background:#fff;
+    }
+    .search input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,135,245,.15)}
+    .actions{display:flex;align-items:center;gap:10px}
+    .icon-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      padding:10px 12px;border:1px solid #e5e7eb;border-radius:999px;background:#fff; cursor:pointer;
+    }
+    .icon-btn:hover{border-color:#cbd5e1}
+    .badge{background:var(--red);color:#fff;border-radius:999px;padding:.5px 7px;font-size:12px}
+    main{min-height:60vh}
+    footer{background:#fff;border-top:1px solid #e5e7eb;margin-top:60px}
+    footer .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+    @media(max-width:900px){ footer .grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+    @media(max-width:620px){
+      .header-wrap{flex-wrap:wrap}
+      .search{order:3;width:100%}
+    }
+
+    /* Sections */
+    .hero{padding:40px 0;background:linear-gradient(180deg,#fff, var(--bg));}
+    .hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
+    .hero .title{font-size:38px;line-height:1.15;font-weight:800}
+    .hero .subtitle{color:var(--muted);margin-top:10px}
+    .hero .cta{display:flex;gap:10px;margin-top:18px}
+    .btn{
+      border:1px solid #e5e7eb;background:#fff;color:var(--text);
+      padding:12px 16px;border-radius:12px;font-weight:600;cursor:pointer;
+    }
+    .btn:hover{border-color:#cbd5e1}
+    .btn-primary{background:var(--blue);color:white;border-color:var(--blue);box-shadow:var(--shadow)}
+    .btn-primary:hover{filter:brightness(.96)}
+    .btn-red{background:var(--red);color:#fff;border-color:var(--red)}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+    .kpi{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow)}
+    .kpi b{font-size:16px}
+    .panel{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:var(--shadow)}
+    .panel.pad{padding:16px}
+
+    .section{padding:26px 0}
+    .section h2{font-size:22px;margin:0 0 10px 0}
+    .grid{display:grid;gap:14px}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media(max-width:1024px){.grid.cols-4{grid-template-columns:repeat(3,minmax(0,1fr));}}
+    @media(max-width:780px){.grid.cols-3,.grid.cols-4{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media(max-width:520px){.grid.cols-3,.grid.cols-4{grid-template-columns:repeat(1,minmax(0,1fr));}}
+
+    /* Cards */
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card .thumb{position:relative;aspect-ratio:1/1;background:#eef2f7}
+    .card .thumb img{object-fit:cover;width:100%;height:100%}
+    .card .body{padding:12px}
+    .brand{font-size:12px;color:var(--muted)}
+    .title-sm{font-weight:600;margin:6px 0}
+    .price{display:flex;gap:8px;align-items:baseline}
+    .price .now{font-weight:700}
+    .price .was{font-size:13px;color:#94a3b8;text-decoration:line-through}
+    .stars{color:#f59e0b}
+    .pill{background:#f1f5f9;border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px;font-size:13px}
+    .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .sale-badge{position:absolute;left:10px;top:10px;background:var(--red);color:#fff;font-weight:700;border-radius:999px;padding:4px 8px;font-size:12px}
+    .new-badge{position:absolute;right:10px;top:10px;background:var(--blue);color:#fff;font-weight:700;border-radius:999px;padding:4px 8px;font-size:12px}
+
+    /* Filters + layout */
+    .layout{display:grid;grid-template-columns:280px 1fr;gap:16px}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}}
+    .filter .row{margin-bottom:14px}
+    .filter label{display:block;font-size:13px;color:#64748b;margin-bottom:6px}
+    .range{display:flex;gap:10px;align-items:center}
+    input[type="range"]{width:100%}
+
+    /* Tables */
+    table{width:100%;border-collapse:collapse}
+    th,td{border-bottom:1px solid #e5e7eb;padding:10px;text-align:left}
+    th{background:#f8fafc}
+
+    /* Toast */
+    .toast{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:100}
+    .toast .t{background:#0f172a;color:#e2e8f0;padding:10px 14px;border-radius:10px;box-shadow:var(--shadow);opacity:.98}
+
+    /* Badges + chips */
+    .chip{display:inline-flex;align-items:center;gap:6px;background:#eef2f7;padding:8px 10px;border-radius:999px;border:1px solid #e5e7eb}
+
+    /* Forms */
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field input,.field select,.field textarea{
+      padding:11px 12px;border:1px solid #e5e7eb;border-radius:10px;outline:none;background:#fff
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,135,245,.1)
+    }
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:640px){ .row{grid-template-columns:1fr} }
+
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+    .right{text-align:right}
+    .mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}.mt-30{margin-top:30px}
+
+    .divider{height:1px;background:#e5e7eb;margin:14px 0}
+
+    /* Sticky checkout summary */
+    .sticky-box{position:sticky;top:86px}
+
+    /* Search suggest */
+    .suggest{position:absolute;top:44px;left:0;right:0;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:var(--shadow);overflow:hidden;display:none;z-index:20}
+    .suggest ul{list-style:none;margin:0;padding:6px}
+    .suggest li{padding:8px 10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .suggest li:hover{background:#f8fafc}
+
+    /* Mini label */
+    .label{font-size:12px;color:#64748b}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div>🚚 1500৳+ অর্ডারে ফ্রি শিপিং • 7 দিনের মধ্যে রিটার্ন</div>
+      <div>BN/EN • BDT</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container header-wrap">
+      <a href="#/" class="logo" aria-label="RSway home">
+        <span style="color:var(--blue)">RSway</span>
+        <span class="cartmark">🛒</span>
+      </a>
+
+      <div class="search" style="position:relative">
+        <input id="searchInput" type="search" placeholder="পণ্য সার্চ করুন..." autocomplete="off" />
+        <div class="suggest" id="searchSuggest"></div>
+      </div>
+
+      <div class="actions">
+        <a class="icon-btn" href="#/wishlist" title="Wishlist">🤍 <span class="label">Wishlist</span> <span class="badge" id="wishCount">0</span></a>
+        <a class="icon-btn" href="#/compare" title="Compare">📊 <span class="label">Compare</span> <span class="badge" id="cmpCount">0</span></a>
+        <a class="icon-btn" href="#/cart" title="Cart">🛒 <span class="label">Cart</span> <span class="badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </header>
+
+<main id="app">
+  <!-- RSway: Scoped styles only for #app -->
+  <style>
+    #app{font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial}
+    #app :root{--rs-blue:#2387F5; --rs-red:#E2252F; --rs-soft:#F6F8FB; --rs-text:#0E1117; --rs-muted:#475569; --rs-card:#FFFFFF; --rs-border:#E5EAF0}
+    #app .rs-container{max-width:1200px;margin:0 auto;padding:0 16px}
+    #app .rs-section{padding:28px 0}
+    #app .rs-title{margin:0 0 8px;font-size:28px;font-weight:700;color:var(--rs-text)}
+    #app .rs-sub{color:var(--rs-muted);margin:0 0 14px}
+    #app .rs-hero{background:linear-gradient(180deg,#FFF, var(--rs-soft));padding:36px 0}
+    #app .rs-hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:24px}
+    #app .rs-hero h1{font-size:36px;line-height:1.15;margin:0 0 10px}
+    #app .rs-cta{display:flex;gap:10px;margin-top:16px}
+    #app .rs-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1px solid transparent;background:var(--rs-blue);color:#fff;font-weight:600;text-decoration:none}
+    #app .rs-btn.secondary{background:#fff;color:var(--rs-text);border-color:var(--rs-border)}
+    #app .rs-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    #app .rs-badge{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--rs-border);border-radius:12px;padding:10px}
+    #app .rs-card{background:#fff;border:1px solid var(--rs-border);border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,.06)}
+    #app .rs-grid{display:grid;gap:16px}
+    #app .cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    #app .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    #app .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:900px){#app .rs-hero-grid{grid-template-columns:1fr} #app .cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:560px){#app .cols-3,#app .cols-4{grid-template-columns:1fr}}
+    #app .rs-cat{display:flex;gap:12px;align-items:center;padding:14px}
+    #app .rs-cat .ico{font-size:22px}
+    #app .rs-cat .nm{font-weight:600}
+    #app .rs-product{padding:12px;display:flex;flex-direction:column}
+    #app .rs-thumb{background:#F2F5FA;border-radius:10px;overflow:hidden;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;position:relative}
+    #app .rs-pill{position:absolute;left:8px;top:8px;background:var(--rs-red);color:#fff;border-radius:999px;font-size:12px;padding:4px 8px}
+    #app .rs-pill.blue{background:var(--rs-blue)}
+    #app .rs-ptitle{font-weight:600;margin:10px 0 4px}
+    #app .rs-muted{color:var(--rs-muted);font-size:14px}
+    #app .rs-price{display:flex;gap:8px;align-items:center;margin-top:6px}
+    #app .rs-compare{text-decoration:line-through;color:#94A3B8}
+    #app .rs-stars{color:#F59E0B;font-size:13px;margin-top:6px}
+    #app .rs-actions{display:flex;gap:8px;margin-top:10px}
+    #app .rs-sm{flex:1;text-align:center;padding:8px;border-radius:10px;border:1px solid var(--rs-border);background:#fff;color:var(--rs-blue);text-decoration:none;font-weight:600}
+    #app .rs-sm.primary{background:var(--rs-blue);color:#fff;border-color:var(--rs-blue)}
+    #app .rs-banner{display:flex;align-items:center;justify-content:center;min-height:160px;background:linear-gradient(90deg,#ECF3FF, #FEE2E2);border:1px dashed #C7D2FE;border-radius:12px;padding:16px;text-align:center}
+  </style>
+
+  <!-- HERO -->
+  <section class="rs-hero">
+    <div class="rs-container rs-hero-grid">
+      <div>
+        <h1>Buy your dream products at RSway</h1>
+        <p class="rs-sub">Free returns • Cash on delivery • Best price guaranteed</p>
+        <div class="rs-cta">
+          <a href="#all-products" class="rs-btn">Shop Now</a>
+          <a href="#deals" class="rs-btn secondary">Hot Deals</a>
+        </div>
+        <div class="rs-badges">
+          <div class="rs-badge">🚚 <div><strong>Fast delivery</strong><div class="rs-muted">Dhaka 1–2 days</div></div></div>
+          <div class="rs-badge">🔁 <div><strong>Easy returns</strong><div class="rs-muted">7‑day policy</div></div></div>
+          <div class="rs-badge">🔒 <div><strong>Secure pay</strong><div class="rs-muted">bKash • Nagad • Card • COD</div></div></div>
+        </div>
+      </div>
+      <div class="rs-card" style="display:flex;align-items:center;justify-content:center;">
+        <div>
+          <div style="font-size:48px;text-align:center">🛍️</div>
+          <p class="rs-muted" style="text-align:center;margin:8px 0 0">Comfort-first UI • RS Blue actions • Red cart highlights</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED CATEGORIES -->
+  <section class="rs-section" id="categories">
+    <div class="rs-container">
+      <h2 class="rs-title">Featured Categories</h2>
+      <p class="rs-sub">Cosmetics, Jewellery, Sneakers and more</p>
+      <div class="rs-grid cols-4">
+        <a class="rs-card rs-cat" href="#cat-cosmetics"><div class="ico">💄</div><div><div class="nm">Cosmetics</div><div class="rs-muted">Makeup, skincare</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-jewellery"><div class="ico">💎</div><div><div class="nm">Jewellery</div><div class="rs-muted">Necklace, earrings</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-sneakers"><div class="ico">👟</div><div><div class="nm">Sneakers</div><div class="rs-muted">Running, casual</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-electronics"><div class="ico">🎧</div><div><div class="nm">Electronics</div><div class="rs-muted">Earbuds, smartwatches</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-home"><div class="ico">🏠</div><div><div class="nm">Home & Living</div><div class="rs-muted">Decor, lighting</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-accessories"><div class="ico">🎒</div><div><div class="nm">Accessories</div><div class="rs-muted">Bags, wallets</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-beauty-tools"><div class="ico">🖌️</div><div><div class="nm">Beauty Tools</div><div class="rs-muted">Brushes & more</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-perfume"><div class="ico">🌸</div><div><div class="nm">Perfume</div><div class="rs-muted">EDP & mists</div></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALS BANNER -->
+  <section class="rs-section" id="deals">
+    <div class="rs-container">
+      <div class="rs-banner rs-card">
+        <div>
+          <div style="font-size:20px;font-weight:700;margin-bottom:6px;color:var(--rs-blue)">🔥 Deals of the Day</div>
+          <div class="rs-muted">Extra 10% off with code <span style="background:#ECF3FF;border:1px dashed var(--rs-blue);border-radius:8px;padding:2px 8px;color:var(--rs-blue)">SAVE10</span> • Free shipping over ৳3,000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEST SELLERS (mixed) -->
+  <section class="rs-section" id="all-products">
+    <div class="rs-container">
+      <h2 class="rs-title">Best Sellers</h2>
+      <p class="rs-sub">Top‑rated picks across all categories</p>
+      <div class="rs-grid cols-4">
+        <!-- Cosmetics -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill">Sale</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Veluxe+Matte+Lipstick" alt="Veluxe Matte Lipstick">
+          </div>
+          <div class="rs-ptitle">Veluxe Matte Lipstick</div>
+          <div class="rs-muted">Cosmetics • Veluxe</div>
+          <div class="rs-price"><strong>৳ 990</strong><span class="rs-compare">৳ 1290</span></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill blue">New</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Glow+Serum+30ml" alt="Glow Serum 30ml">
+          </div>
+          <div class="rs-ptitle">Glow Serum 30ml</div>
+          <div class="rs-muted">Cosmetics • Lumina</div>
+          <div class="rs-price"><strong>৳ 1490</strong></div>
+          <div class="rs-stars">★★★★★ 4.8</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+
+        <!-- Jewellery -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Silver+Pendant" alt="Sterling Silver Pendant">
+          </div>
+          <div class="rs-ptitle">Sterling Silver Pendant</div>
+          <div class="rs-muted">Jewellery • Aurelia</div>
+          <div class="rs-price"><strong>৳ 2490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Hoop+Earrings" alt="Gold Plated Hoop Earrings">
+          </div>
+          <div class="rs-ptitle">Gold Plated Hoop Earrings</div>
+          <div class="rs-muted">Jewellery • Aurelia</div>
+          <div class="rs-price"><strong>৳ 1890</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+
+        <!-- Sneakers -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill">Sale</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS+Runner+Pro" alt="RS Runner Pro">
+          </div>
+          <div class="rs-ptitle">RS Runner Pro</div>
+          <div class="rs-muted">Sneakers • RSway</div>
+          <div class="rs-price"><strong>৳ 4490</strong><span class="rs-compare">৳ 4990</span></div>
+          <div class="rs-stars">★★★★★ 4.7</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Street+Court+Classic" alt="Street Court Classic">
+          </div>
+          <div class="rs-ptitle">Street Court Classic</div>
+          <div class="rs-muted">Sneakers • RSway</div>
+          <div class="rs-price"><strong>৳ 3990</strong></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+
+        <!-- Electronics -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill">Sale</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS-Buds+Wireless" alt="RS-Buds Wireless Earbuds">
+          </div>
+          <div class="rs-ptitle">RS‑Buds Wireless</div>
+          <div class="rs-muted">Electronics • RSway</div>
+          <div class="rs-price"><strong>৳ 3490</strong><span class="rs-compare">৳ 3990</span></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS+Smartwatch+Lite" alt="RS Smartwatch Lite">
+          </div>
+          <div class="rs-ptitle">RS Smartwatch Lite</div>
+          <div class="rs-muted">Electronics • RSway</div>
+          <div class="rs-price"><strong>৳ 6990</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY HIGHLIGHTS -->
+  <section class="rs-section" id="cat-cosmetics">
+    <div class="rs-container">
+      <h2 class="rs-title">Cosmetics</h2>
+      <p class="rs-sub">Makeup, skincare and daily essentials</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Daily+Moisturizer" alt="Daily Hydrating Moisturizer"></div>
+          <div class="rs-ptitle">Daily Hydrating Moisturizer</div>
+          <div class="rs-muted">Nova</div>
+          <div class="rs-price"><strong>৳ 1190</strong></div>
+          <div class="rs-stars">★★★★★ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Glow+Serum" alt="Glow Serum 30ml"></div>
+          <div class="rs-ptitle">Glow Serum 30ml</div>
+          <div class="rs-muted">Lumina</div>
+          <div class="rs-price"><strong>৳ 1490</strong></div>
+          <div class="rs-stars">★★★★★ 4.8</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Pro+Brush+Set" alt="Pro Makeup Brush Set"></div>
+          <div class="rs-ptitle">Pro Makeup Brush Set (12 pcs)</div>
+          <div class="rs-muted">Veluxe</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Veluxe+Lipstick" alt="Veluxe Matte Lipstick"></div>
+          <div class="rs-ptitle">Veluxe Matte Lipstick</div>
+          <div class="rs-muted">Veluxe</div>
+          <div class="rs-price"><strong>৳ 990</strong> <span class="rs-compare">৳ 1290</span></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-jewellery">
+    <div class="rs-container">
+      <h2 class="rs-title">Jewellery</h2>
+      <p class="rs-sub">Elegant everyday pieces</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Silver+Pendant" alt="Sterling Silver Pendant"></div>
+          <div class="rs-ptitle">Sterling Silver Pendant</div>
+          <div class="rs-muted">Aurelia</div>
+          <div class="rs-price"><strong>৳ 2490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Hoop+Earrings" alt="Gold Plated Hoop Earrings"></div>
+          <div class="rs-ptitle">Gold Plated Hoop Earrings</div>
+          <div class="rs-muted">Aurelia</div>
+          <div class="rs-price"><strong>৳ 1890</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Pearl+Bracelet" alt="Classic Pearl Bracelet"></div>
+          <div class="rs-ptitle">Classic Pearl Bracelet</div>
+          <div class="rs-muted">Pearla</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★★ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Minimal+Ring" alt="Minimal Silver Ring"></div>
+          <div class="rs-ptitle">Minimal Silver Ring</div>
+          <div class="rs-muted">Aurelia</div>
+          <div class="rs-price"><strong>৳ 1290</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-sneakers">
+    <div class="rs-container">
+      <h2 class="rs-title">Sneakers</h2>
+      <p class="rs-sub">Run, walk, or chill — we got you</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Runner+Pro" alt="RS Runner Pro"></div>
+          <div class="rs-ptitle">RS Runner Pro</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 4490</strong> <span class="rs-compare">৳ 4990</span></div>
+          <div class="rs-stars">★★★★★ 4.7</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Court+Classic" alt="Street Court Classic"></div>
+          <div class="rs-ptitle">Street Court Classic</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 3990</strong></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Trail+Hiker" alt="TrailFlex Hiker"></div>
+          <div class="rs-ptitle">TrailFlex Hiker</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 5490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Slip-on" alt="Daily Slip‑on"></div>
+          <div class="rs-ptitle">Daily Slip‑on</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 3290</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-electronics">
+    <div class="rs-container">
+      <h2 class="rs-title">Electronics</h2>
+      <p class="rs-sub">Earbuds, wearables and more</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS-Buds" alt="RS-Buds Wireless"></div>
+          <div class="rs-ptitle">RS‑Buds Wireless</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 3490</strong> <span class="rs-compare">৳ 3990</span></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Smartwatch" alt="RS Smartwatch Lite"></div>
+          <div class="rs-ptitle">RS Smartwatch Lite</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 6990</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Bluetooth+Speaker" alt="Portable Bluetooth Speaker"></div>
+          <div class="rs-ptitle">Portable Bluetooth Speaker</div>
+          <div class="rs-muted">Soundly</div>
+          <div class="rs-price"><strong>৳ 2290</strong></div>
+          <div class="rs-stars">★★★★☆ 4.1</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Power+Bank+10k" alt="Power Bank 10,000 mAh"></div>
+          <div class="rs-ptitle">Power Bank 10,000 mAh</div>
+          <div class="rs-muted">Volt</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-home">
+    <div class="rs-container">
+      <h2 class="rs-title">Home & Living</h2>
+      <p class="rs-sub">Make your space cozy</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Scented+Candle" alt="Aromatherapy Scented Candle"></div>
+          <div class="rs-ptitle">Aromatherapy Scented Candle</div>
+          <div class="rs-muted">Homely</div>
+          <div class="rs-price"><strong>৳ 890</strong></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Desk+Lamp" alt="Minimalist Desk Lamp"></div>
+          <div class="rs-ptitle">Minimalist Desk Lamp</div>
+          <div class="rs-muted">Homely</div>
+          <div class="rs-price"><strong>৳ 1990</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-accessories">
+    <div class="rs-container">
+      <h2 class="rs-title">Accessories</h2>
+      <p class="rs-sub">Everyday carry essentials</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Leather+Wallet" alt="Genuine Leather Wallet"></div>
+          <div class="rs-ptitle">Genuine Leather Wallet</div>
+          <div class="rs-muted">Crafto</div>
+          <div class="rs-price"><strong>৳ 1290</strong></div>
+          <div class="rs-stars">★★★★★ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Minimal+Backpack" alt="Minimalist Backpack 20L"></div>
+          <div class="rs-ptitle">Minimalist Backpack 20L</div>
+          <div class="rs-muted">Crafto</div>
+          <div class="rs-price"><strong>৳ 2790</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-beauty-tools">
+    <div class="rs-container">
+      <h2 class="rs-title">Beauty Tools</h2>
+      <p class="rs-sub">Brushes and accessories</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Brush+Set" alt="Pro Makeup Brush Set"></div>
+          <div class="rs-ptitle">Pro Makeup Brush Set (12 pcs)</div>
+          <div class="rs-muted">Veluxe</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Beauty+Sponge" alt="Beauty Sponge Duo"></div>
+          <div class="rs-ptitle">Beauty Sponge Duo</div>
+          <div class="rs-muted">BlendX</div>
+          <div class="rs-price"><strong>৳ 490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-perfume">
+    <div class="rs-container">
+      <h2 class="rs-title">Perfume</h2>
+      <p class="rs-sub">Long‑lasting fragrances</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=EDP+Mist" alt="Eau De Parfum Mist"></div>
+          <div class="rs-ptitle">Eau De Parfum Mist</div>
+          <div class="rs-muted">Lumina</div>
+          <div class="rs-price"><strong>৳ 2190</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Woody+EDP" alt="Woody Eau De Parfum"></div>
+          <div class="rs-ptitle">Woody Eau De Parfum</div>
+          <div class="rs-muted">Aroma</div>
+          <div class="rs-price"><strong>৳ 2390</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF / NEWSLETTER -->
+  <section class="rs-section">
+    <div class="rs-container">
+      <div class="rs-grid cols-2">
+        <div class="rs-card" style="padding:16px">
+          <h3 style="margin:0 0 8px">What customers say</h3>
+          <p class="rs-muted">“Sneaker quality is awesome, size fit perfectly. Delivery in 1 day!” — Farhan</p>
+          <p class="rs-muted">“Cosmetics are genuine and shades match perfectly. Love the packaging!” — Tasfia</p>
+        </div>
+        <div class="rs-card" style="padding:16px">
+          <h3 style="margin:0 0 8px">Subscribe & save</h3>
+          <p class="rs-muted">Get updates on new arrivals and exclusive coupons.</p>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <input type="email" placeholder="your@email.com" style="flex:1;border:1px solid var(--rs-border);border-radius:10px;padding:10px 12px;outline:none">
+            <a class="rs-btn" href="#">Subscribe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+  <footer>
+    <div class="container" style="padding:28px 16px">
+      <div class="grid">
+        <div>
+          <div class="logo"><span style="color:var(--blue)">RSway</span><span class="cartmark">🛒</span></div>
+          <p class="muted mt-8">Fast delivery • Cash on Delivery • Easy Returns</p>
+          <div class="mt-12">
+            <span class="chip">🔒 Secure checkout</span>
+            <span class="chip">⭐ 4.8/5</span>
+          </div>
+        </div>
+        <div>
+          <h4>Help</h4>
+          <div class="mt-8">
+            <div><a href="faq.html">FAQ</a></div>
+            <div><a href="contact.html">Contact</a></div>
+            <div><a href="#/track">Track Order</a></div>
+          </div>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <div class="mt-8">
+            <div><a href="about.html">About us</a></div>
+            <div><a href="blog.html">Blog</a></div>
+          </div>
+        </div>
+        <div>
+          <h4>Policy</h4>
+          <div class="mt-8">
+            <div><a href="#/shipping">Shipping</a></div>
+            <div><a href="#/return-policy">Return & Refund</a></div>
+            <div><a href="#/privacy">Privacy</a></div>
+            <div class="mt-12 muted">© <span id="year"></span> RSway</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // --- Utils ---
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+    const fmtBDT = n => `৳ ${Number(n).toLocaleString('bn-BD')}`;
+    const percent = (was, now) => Math.max(0, Math.round(100 - (now/was)*100));
+    const saveLS = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+    const loadLS = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } };
+    const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    const title = t => document.title = `${t} — RSway`;
+    const toast = (msg) => {
+      const wrap = $('#toast');
+      const el = document.createElement('div');
+      el.className = 't';
+      el.textContent = msg;
+      wrap.appendChild(el);
+      setTimeout(()=>{ el.remove(); }, 2200);
+    };
+
+    // --- Data ---
+    const CATEGORIES = [
+      { slug: 'electronics', name: 'Electronics', icon:'🔌', banner:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'fashion', name: 'Fashion', icon:'👗', banner:'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'home-living', name: 'Home & Living', icon:'🏡', banner:'https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'beauty', name: 'Beauty', icon:'💄', banner:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'sports', name: 'Sports', icon:'🏃', banner:'https://images.unsplash.com/photo-1546484959-f9a53db79a41?q=80&w=1600&auto=format&fit=crop' },
+    ];
+
+    const PRODUCTS = [
+      // Electronics
+      {id:'p1', slug:'wireless-earbuds', title:'RSway Air Wireless Earbuds', category:'electronics', brand:'RSway', price:1999, was:2499, rating:4.6, reviews:125, sku:'RS-AIR-01', stock:18, weight:0.1,
+        colors:['Black','White'], sizes:[], images:[
+          'https://images.unsplash.com/photo-1585386959984-a4155223165b?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=1200&auto=format&fit=crop'
+        ],
+        specs:{Connectivity:'Bluetooth 5.3', Battery:'24h with case', Warranty:'6 Months'} },
+      {id:'p2', slug:'smartwatch-neo', title:'Smartwatch Neo', category:'electronics', brand:'NeoTech', price:3499, was:3999, rating:4.2, reviews:84, sku:'NEO-SW-100', stock:12,
+        colors:['Black','Blue'], images:[
+          'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=1200&auto=format&fit=crop'
+        ], specs:{Display:'AMOLED', GPS:'Yes', Warranty:'1 Year'}},
+      {id:'p3', slug:'noise-cancelling-headphone', title:'ZX Noise Cancelling Headphone', category:'electronics', brand:'ZenX', price:5990, was:6990, rating:4.7, reviews:201, sku:'ZX-H900', stock:9,
+        colors:['Black'], images:['https://images.unsplash.com/photo-1518446005430-4d3f21aa83ba?q=80&w=1200&auto=format&fit=crop'],
+        specs:{ANC:'Hybrid', Battery:'30h', Charge:'USB-C'}},
+
+      // Fashion
+      {id:'p4', slug:'classic-tee', title:'Classic Cotton Tee', category:'fashion', brand:'RS Basics', price:699, was:899, rating:4.4, reviews:56, sku:'RS-TEE-CL', stock:40,
+        colors:['White','Black','Blue'], sizes:['S','M','L','XL'], images:['https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop'], specs:{Material:'100% Cotton'}},
+      {id:'p5', slug:'denim-jacket', title:'Denim Jacket', category:'fashion', brand:'DenimHub', price:2490, was:2990, rating:4.3, reviews:33, sku:'DNM-JKT-01', stock:25, colors:['Blue'], sizes:['M','L','XL'],
+        images:['https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1200&auto=format&fit=crop'], specs:{Material:'Denim'}},
+
+      // Home & Living
+      {id:'p6', slug:'ceramic-planter', title:'Ceramic Planter Pot', category:'home-living', brand:'HomeLeaf', price:590, was:790, rating:4.5, reviews:77, sku:'HL-POT-01', stock:50,
+        colors:['White'], images:['https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?q=80&w=1200&auto=format&fit=crop'], specs:{Size:'6 inch'}},
+      {id:'p7', slug:'led-table-lamp', title:'LED Table Lamp', category:'home-living', brand:'LiteUp', price:1290, was:1590, rating:4.1, reviews:41, sku:'LIT-LAMP-22', stock:32,
+        colors:['Black','White'], images:['https://images.unsplash.com/photo-1545153996-5f6d4d04b8bb?q=80&w=1200&auto=format&fit=crop'], specs:{Power:'6W'}},
+
+      // Beauty
+      {id:'p8', slug:'matte-lipstick', title:'Velvet Matte Lipstick', category:'beauty', brand:'GlowUp', price:490, was:690, rating:4.0, reviews:63, sku:'GU-LIP-11', stock:80,
+        colors:['Ruby Red','Nude'], images:['https://images.unsplash.com/photo-1512203492609-8f5f4a0c3d45?q=80&w=1200&auto=format&fit=crop'], specs:{Finish:'Matte'}},
+      {id:'p9', slug:'face-serum', title:'Vitamin C Face Serum 30ml', category:'beauty', brand:'DermaLab', price:990, was:1290, rating:4.6, reviews:104, sku:'DL-SERUM-VC', stock:36,
+        colors:[], images:['https://images.unsplash.com/photo-1585386959984-95c342b0c47b?q=80&w=1200&auto=format&fit=crop'], specs:{VitaminC:'10%'}},
+
+      // Sports
+      {id:'p10', slug:'running-shoes', title:'AeroRun Running Shoes', category:'sports', brand:'Aero', price:2890, was:3290, rating:4.3, reviews:58, sku:'AR-RUN-3', stock:20,
+        colors:['Black','Gray'], sizes:['40','41','42','43'], 

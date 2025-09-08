@@ -1,1004 +1,781 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="bn">
 <head>
-  <meta property="og:image" content="https://www.bridgebytetech.com/logo.jpg" />
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BridgeByte Tech — Software & Digital Solutions</title>
-  <link rel="icon" type="image/jpeg" href="https://www.bridgebytetech.com/logo.jpg" />
-  <link rel="icon" href="logo.jpg" type="image/jpeg">
-  <link rel="shortcut icon" type="image/jpeg" href="https://www.bridgebytetech.com/logo.jpg" />
-  <meta name="description" content="BridgeByte Tech builds reliable, scalable software, UI/UX, cloud & DevOps, and consulting for modern businesses." />
-  <meta property="og:title" content="Bridge Byte Tech, Software & Digital Solutions" />
-  <meta property="og:description" content="We help businesses turn ideas into reliable, scalable digital products." />
-  <meta property="og:type" content="website" />
-  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-
-  <meta name="color-scheme" content="dark" />
-  <meta name="format-detection" content="telephone=no, email=no, address=no">
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Bridge Byte Tech – Digital Transformation" />
-  <meta name="twitter:description" content="Bring your vision to life with scalable, secure software built for tomorrow." />
-  <meta name="twitter:image" content="https://www.bridgebytetech.com/logo.jpg" />
-  <meta property="og:title" content="Bridge Byte Tech – Future-Ready Software Solutions" />
-  <meta property="og:description" content="Innovation meets reliability—Tailored software, mobile apps, cloud & DevOps, AI, and more." />
-  <meta property="og:image" content="https://bridgebytetech.com/logo.jpg" />
-  <meta property="og:url" content="https://bridgebytetech.com/" />
-  <meta property="og:type" content="website" />
-  <meta name="description" content="Bridge Byte Tech provides future-ready software solutions including web, mobile apps, cloud, AI, and DevOps." />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
+  <title>RSway — Smart Shopping</title>
+  <meta name="description" content="RSway e-commerce. Fast delivery, easy returns, best deals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b1030; --bg-2:#0b1030; --text:#e8f2ff; --muted:#9bb3d1;
-      --primary:#49e1ff; --secondary:#a77bff; --accent:#ff77d5;
-      --success:#39e7b1; --warning:#ffd36e;
-      --panel:rgba(255,255,255,.06); --border:rgba(255,255,255,.14);
-      --radius:18px; --radius-sm:12px; --container:1180px; --glass:14px;
-      --shadow-1:0 10px 30px rgba(0,0,0,.35);
+      --blue:#2387F5;
+      --red:#E2252F;
+      --bg:#F6F8FB;
+      --text:#0E1117;
+      --muted:#475569;
+      --soft:#E2E8F0;
+      --white:#fff;
+      --shadow:0 8px 24px rgba(2,6,23,.06);
+      --radius:12px;
+      --radius-lg:18px;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,body{margin:0;padding:0}
     body{
-      margin:0; color:var(--text);
-      font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      letter-spacing:0.1px; word-spacing:0.2px;
-      /* Smooth single global background (no separate shades) */
-      background: linear-gradient(180deg, var(--bg-2), var(--bg));
-      overflow-x:hidden; scroll-behavior:smooth;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background: radial-gradient(1000px 500px at 10% -10%, #ffffff, transparent 60%), linear-gradient(180deg, #FAFCFF 0%, var(--bg) 100%);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
-
-    p{line-height:1.85; margin:0 0 16px}
-
-    /* subtle noise */
-    body::after{content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
-      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>')}
-
-    .container{width:100%; max-width:var(--container); margin-inline:auto; padding-inline:20px}
-
-    /* Progress + cursor glow + particles */
-    .progress{position:fixed; top:0; left:0; height:3px; width:0%;
-      background:linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)); z-index:999}
-    .cursor-glow{position:fixed; width:260px; height:260px; border-radius:50%;
-      background:radial-gradient(circle at center, rgba(73,225,255,.20), rgba(167,123,255,.15) 40%, rgba(255,119,213,.12) 60%, transparent 70%);
-      pointer-events:none; mix-blend-mode:screen; filter:blur(22px); transform:translate(-50%,-50%); z-index:2}
-    #particles{position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.65}
-
-    /* Header / Nav */
-    header{
-      position:sticky; top:0; z-index:60;
-      backdrop-filter: blur(var(--glass)) saturate(140%);
-      background: linear-gradient(180deg, rgba(8,13,38,.75), rgba(8,13,38,.45));
-      border-bottom:1px solid rgba(255,255,255,.08);
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px}
+    .topbar{background:#0b1220;color:#e2e8f0}
+    .topbar .container{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:6px 16px;font-size:12px}
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #e5e7eb}
+    .header-wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    .logo{font-family:Poppins,Inter;font-weight:700;font-size:26px;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+    .logo .cartmark{color:var(--red);font-size:22px}
+    .search{flex:1;display:flex;align-items:center;gap:8px}
+    .search input{
+      width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:999px;
+      outline:none;transition:.2s;background:#fff;
     }
-    .nav{height:72px; display:flex; align-items:center; justify-content:space-between; gap:12px}
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
-    .logo{width:36px; height:36px; border-radius:10px; position:relative;
-      background: radial-gradient(120% 120% at 0% 100%, var(--secondary), transparent 60%),
-                  radial-gradient(120% 120% at 100% 0%, var(--primary), transparent 60%), #0a0f2c;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 6px 18px rgba(0,0,0,.35)}
-    .logo::after{content:""; position:absolute; inset:3px; border-radius:8px;
-      background: radial-gradient(120% 120% at 20% 80%, rgba(255,255,255,.15), transparent 60%)}
-    nav ul{display:flex; gap:20px; list-style:none; margin:0; padding:0; align-items:center}
-    nav a{color:var(--text); text-decoration:none; font-weight:700; opacity:.86; padding:10px 12px; border-radius:10px; transition:all .25s}
-    nav a:hover{opacity:1; background:rgba(255,255,255,.06)}
-    nav a.active{background:linear-gradient(90deg, rgba(73,225,255,.22), rgba(167,123,255,.22)); border:1px solid rgba(255,255,255,.12)}
-    .cta{background:linear-gradient(90deg, var(--primary), var(--secondary)); color:#051222; padding:10px 16px; border-radius:12px; font-weight:800; border:0; cursor:pointer}
-    .menu-btn{display:none; background:transparent; border:0; color:var(--text); font-size:24px}
-
-    /* Remove underlines everywhere (esp. contact links) */
-    a, a:visited, a:hover, a:focus, a:active{
-      text-decoration:none !important;
-      -webkit-text-decoration: none !important;
-      text-decoration-skip-ink: none;
+    .search input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,135,245,.15)}
+    .actions{display:flex;align-items:center;gap:10px}
+    .icon-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      padding:10px 12px;border:1px solid #e5e7eb;border-radius:999px;background:#fff; cursor:pointer;
     }
-
-    /* Tagline (transparent so global background stays) */
-    .tagline-bar{border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08); background:transparent}
-    .tagline{display:flex; align-items:center; gap:8px; padding:10px 0; font-size:13px; color:#d4eaff; font-weight:700}
-    .tagline i{color:var(--primary)}
-
-    /* Mobile nav panel */
-    .mobile-nav{display:none; position:fixed; inset:72px 10px auto; background:rgba(8,13,38,.95); backdrop-filter: blur(var(--glass));
-      border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:12px; z-index:80}
-    .mobile-nav.open{display:block}
-    .mobile-nav a{display:block; padding:12px; border-radius:10px; color:var(--text); text-decoration:none}
-
-    /* Hero */
-    .hero{position:relative; padding:90px 0 120px; min-height:92vh; display:grid; place-items:center}
-    .hero-inner{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:center}
-    .eyebrow{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; font-size:12px; color:#cfe9ff;
-      background:linear-gradient(90deg, rgba(73,225,255,.16), rgba(167,123,255,.16)); border:1px solid rgba(255,255,255,.14)}
-    h1{margin:14px 0 12px; font-size:clamp(36px,6vw,64px); line-height:1.06; font-weight:800; letter-spacing:.1px; color:#f2f8ff}
-    .hero p{color:var(--muted); font-size:clamp(15px,1.4vw,18px); max-width:62ch}
-    .trusted{margin-top:12px; font-size:13px; color:#b8c9e1; opacity:.9}
-    .actions{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
-    .btn{padding:12px 18px; border-radius:14px; border:1px solid rgba(255,255,255,.14); color:var(--text); text-decoration:none; font-weight:800; background:rgba(255,255,255,.06); transition:transform .2s, box-shadow .2s}
-    .btn:hover{transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,.3)}
-    .btn.primary{background:linear-gradient(90deg, var(--primary), var(--secondary)); color:#04101f; border-color:transparent}
-    .stacks{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-    .chip{display:inline-flex; gap:6px; align-items:center; font-size:12px; color:#cfe9ff; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12)}
-
-    /* Planet + blobs */
-    .planet{width:min(520px,90%); aspect-ratio:1/1; border-radius:999px; margin-inline:auto; position:relative; isolation:isolate;
-      background: radial-gradient(60% 60% at 40% 40%, rgba(73,225,255,.65), transparent 60%),
-                  radial-gradient(60% 60% at 70% 70%, rgba(167,123,255,.55), transparent 65%),
-                  radial-gradient(60% 60% at 30% 70%, rgba(255,119,213,.4), transparent 60%),
-                  linear-gradient(180deg, #0b1240, #0d1033);
-      box-shadow: inset 0 -30px 60px rgba(0,0,0,.35), 0 30px 120px rgba(96,60,255,.25), 0 0 0 1px rgba(255,255,255,.06);
-      overflow:hidden; transform-style:preserve-3d; animation:float 8s ease-in-out infinite}
-    .planet::before{content:""; position:absolute; inset:-1px; border-radius:inherit; background:conic-gradient(from 180deg, rgba(255,255,255,.12), rgba(255,255,255,0) 35%); mix-blend-mode:overlay; filter:blur(1px)}
-    .planet .ring{position:absolute; inset:-8%; border-radius:50%; border:1px solid rgba(255,255,255,.18); transform:rotateX(70deg) rotateZ(-20deg); box-shadow:0 0 120px rgba(73,225,255,.25) inset}
-    .planet .dots{position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-      background-image:
-        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.7), rgba(255,255,255,0) 70%),
-        radial-gradient(2px 2px at 60% 70%, rgba(255,255,255,.7), rgba(255,255,255,0) 70%),
-        radial-gradient(2px 2px at 70% 25%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%),
-        radial-gradient(2px 2px at 35% 75%, rgba(255,255,255,.65), rgba(255,255,255,0) 70%);
-      filter:blur(.5px); animation:twinkle 6s linear infinite}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @keyframes twinkle{0%{opacity:.7}50%{opacity:1}100%{opacity:.7}}
-    .orb{position:absolute; border-radius:999px; filter:blur(40px); opacity:.6; z-index:-1}
-    .orb.cyan{width:360px; height:360px; background: radial-gradient(circle at 30% 30%, rgba(73,225,255,.85), transparent 60%)}
-    .orb.violet{width:440px; height:440px; background: radial-gradient(circle at 70% 40%, rgba(167,123,255,.85), transparent 60%)}
-    .orb.pink{width:300px; height:300px; background: radial-gradient(circle at 40% 50%, rgba(255,119,213,.9), transparent 60%)}
-    .hero .orb.cyan{top:-120px; left:-120px}
-    .hero .orb.violet{bottom:-140px; right:-180px}
-    .hero .orb.pink{top:40%; left:-160px}
-    .scroll-ind{position:absolute; bottom:24px; left:50%; transform:translateX(-50%); font-size:12px; color:#c6d7f3; opacity:.7; display:flex; align-items:center; gap:8px}
-    .scroll-ind .mouse{width:20px; height:28px; border:2px solid rgba(255,255,255,.5); border-radius:12px; position:relative}
-    .scroll-ind .mouse::after{content:""; width:4px; height:6px; background:#fff; border-radius:2px; position:absolute; left:50%; top:6px; transform:translateX(-50%); animation:wheel 1.6s infinite}
-    @keyframes wheel{0%{opacity:1; transform: translate(-50%,0)}100%{opacity:0; transform: translate(-50%,10px)}}
-
-    /* Marquee */
-    .marquee{margin-top:-40px; padding:12px 0; border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08); background:transparent; overflow:hidden}
-    .marquee .track{display:flex; gap:30px; align-items:center; white-space:nowrap; will-change:transform; animation:scroll 22s linear infinite}
-    .tag{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:#d9eaff; font-weight:700; font-size:14px}
-    .tag i{color:var(--primary)}
-    @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .icon-btn:hover{border-color:#cbd5e1}
+    .badge{background:var(--red);color:#fff;border-radius:999px;padding:.5px 7px;font-size:12px}
+    main{min-height:60vh}
+    footer{background:#fff;border-top:1px solid #e5e7eb;margin-top:60px}
+    footer .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+    @media(max-width:900px){ footer .grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+    @media(max-width:620px){
+      .header-wrap{flex-wrap:wrap}
+      .search{order:3;width:100%}
+    }
 
     /* Sections */
-    section{padding:110px 0}
-    .section-title{ text-align:center; margin-bottom:12px; font-size:clamp(24px,2.8vw,34px); font-weight:800;
-      background:linear-gradient(90deg, #d9eaff, #9fe8ff 35%, #d3b6ff 70%, #ffd1f3 100%); -webkit-background-clip:text; color:transparent}
-    .lead{color:var(--muted); text-align:center; max-width:76ch; margin:0 auto 34px}
-
-    /* About */
-    .about .wrap{display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:stretch}
-    .card{position:relative; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow-1); overflow:hidden}
-    .card::after{content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
-      background:radial-gradient(80% 80% at 0% 100%, rgba(73,225,255,.18), transparent 60%), radial-gradient(80% 80% at 100% 0%, rgba(167,123,255,.18), transparent 60%)}
-    .about .card, .about p{text-align:center}
-    .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:10px}
-    .metric{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.14); border-radius:16px; padding:16px; text-align:center}
-    .metric .num{font-size:28px; font-weight:800} .metric .label{color:#b7c9e6; font-size:13px}
-
-    /* Services */
-    .services-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:22px}
-    .service-card{position:relative; padding:20px; border-radius:20px; border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)); transition:transform .2s, box-shadow .2s, border-color .2s; will-change:transform}
-    .service-card:hover{transform:translateY(-8px); box-shadow:0 30px 70px rgba(0,0,0,.4); border-color:rgba(255,255,255,.25)}
-    .service-card .icon{width:54px; height:54px; display:grid; place-items:center; border-radius:16px; margin-bottom:10px;
-      background:linear-gradient(140deg, rgba(73,225,255,.24), rgba(167,123,255,.24)); border:1px solid rgba(255,255,255,.15); box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
-    .service-card h3{margin:6px 0 8px; font-size:18px}
-    .service-card p{color:var(--muted); font-size:14px; line-height:1.7}
-    .learn-more{display:inline-flex; align-items:center; gap:6px; margin-top:12px; color:#cfe9ff; text-decoration:none; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); transition:all .2s}
-    .learn-more:hover{color:#061222; background:linear-gradient(90deg, var(--primary), var(--secondary)); transform:translateY(-2px)}
-    .badge{position:absolute; top:16px; right:16px; font-size:11px; padding:6px 8px; border-radius:999px; background:rgba(57,231,177,.18); border:1px solid rgba(57,231,177,.3); color:#e7fff7}
-    .center-actions{display:none} /* removed "View all services" */
-
-    /* Products */
-    .products-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:20px; align-items:stretch}
-    .product{display:grid; grid-template-columns:.9fr 1.1fr; gap:18px; align-items:center; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); border-radius:20px; padding:22px}
-    .p-media{border-radius:16px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); display:grid; place-items:center; aspect-ratio:16/10; overflow:hidden}
-    .p-media img{max-width:80%; height:auto; filter: drop-shadow(0 10px 24px rgba(0,0,0,.35))}
-    .p-body h3{margin:0 0 8px}
-    .p-body p{color:#cfe0ff; line-height:1.7}
-    .p-tags{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0}
-    .p-tags .chip{background:rgba(255,255,255,.08)}
-    .p-actions{display:flex; gap:10px; flex-wrap:wrap}
-    .partners{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); border-radius:20px; padding:22px}
-    .partners h4{margin:0 0 10px; text-align:center}
-    .logo-row{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; align-items:center}
-    .logo-card{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:16px; display:grid; place-items:center; padding:16px}
-    .logo-card img{max-width:140px; height:auto}
-
-    /* Strategy */
-    .process{border:none; background:transparent}
-    .timeline{position:relative; margin-top:28px}
-    .timeline .bar{position:absolute; left:10px; right:10px; top:34px; height:2px; background:rgba(255,255,255,.1); border-radius:2px}
-    .timeline .bar .fill{height:100%; width:0%; background:linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)); border-radius:2px}
-    .steps{display:grid; grid-template-columns:repeat(6,1fr); gap:16px; position:relative}
-    .step{text-align:center; padding:18px; border-radius:16px; background:var(--panel); border:1px solid rgba(255,255,255,.14)}
-    .step .circle{width:26px; height:26px; border-radius:50%; margin:0 auto 10px; background:linear-gradient(140deg, var(--primary), var(--secondary));
-      box-shadow:0 0 0 4px rgba(255,255,255,.06), 0 6px 16px rgba(0,0,0,.3); display:grid; place-items:center; color:#051222; font-weight:800; font-size:12px}
-    .step h4{margin:6px 0 6px; font-size:15px} .step p{color:#b9c8e2; font-size:13px}
-
-    /* Why choose us */
-    .why .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-    .why .item{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:18px; display:flex; gap:14px; align-items:flex-start}
-    .why .item i{font-size:22px; color:var(--success); margin-top:4px}
-    .why .item h4{margin:0 0 6px}
-
-    /* Contact */
-    .contact-wrap{margin-top:20px; display:grid; grid-template-columns:.9fr 1.1fr; gap:22px}
-    .contact-list{list-style:none; padding:0; margin:0; display:grid; gap:12px}
-    .contact-list a{display:flex; align-items:center; gap:10px; color:#cfe0ff; padding:8px 10px; border-radius:12px; transition:all .25s;
-      text-decoration:none !important; border-bottom:0 !important; box-shadow:none !important}
-    .contact-list a i{color:var(--primary)}
-    .contact-list a:hover{transform:translateY(-2px) scale(1.03); color:#061222; background:linear-gradient(90deg, var(--primary), var(--secondary)); box-shadow:0 12px 28px rgba(0,0,0,.28)}
-    form{display:grid; gap:12px}
-    .input{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--text); border-radius:12px; padding:12px 14px; outline:0; font:inherit}
-    textarea.input{min-height:130px; resize:vertical}
-    .gradient-btn{background:linear-gradient(90deg, var(--primary), var(--secondary)); color:#04101f; border:0; padding:12px 16px; border-radius:12px; font-weight:800; cursor:pointer}
-    .form-note{font-size:12px; color:#b8c9e1}
-    .social{cursor:pointer; transition:transform .25s, background .25s, color .25s, box-shadow .25s}
-    .social:hover{transform:translateY(-2px) scale(1.06); background:linear-gradient(90deg, var(--primary), var(--secondary)); color:#061220; box-shadow:0 12px 28px rgba(0,0,0,.28)}
-
-    /* Footer + back to top */
-    footer{padding:26px 0; color:#98a9c6; font-size:13px; display:flex; justify-content:space-between; align-items:center; gap:14px}
-    .footer-links{display:flex; gap:14px} .footer-links a{color:#adc0df}
-    .to-top{position:fixed; right:18px; bottom:18px; width:44px; height:44px; border-radius:12px; border:1px solid rgba(255,255,255,.14);
-      display:grid; place-items:center; color:#dff5ff; background:rgba(255,255,255,.07); box-shadow:0 10px 24px rgba(0,0,0,.3); cursor:pointer; opacity:0; visibility:hidden; transform:translateY(10px); transition:all .25s; z-index:50}
-    .to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
-
-    /* Reveal (fallback visible) */
-    .reveal{opacity:1; transform:none}
-
-    .has-io .reveal{opacity:0; transform:translateY(18px) scale(.98); transition:all .8s cubic-bezier(.2,.6,.2,1)}
-    .has-io .reveal.show{opacity:1; transform:none}
-    .has-io .split .word{opacity:0; transform:translateY(10px); transition:transform .5s ease, opacity .5s ease}
-    .has-io .split.show .word{opacity:1; transform:none}
-
-    /* Responsive */
-    @media (max-width:1180px){
-      .services-grid{grid-template-columns:repeat(3,1fr)}
-      .steps{grid-template-columns:repeat(3,1fr)}
-      .products-grid{grid-template-columns:1fr}
-      .product{grid-template-columns:1fr}
+    .hero{padding:40px 0;background:linear-gradient(180deg,#fff, var(--bg));}
+    .hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
+    .hero .title{font-size:38px;line-height:1.15;font-weight:800}
+    .hero .subtitle{color:var(--muted);margin-top:10px}
+    .hero .cta{display:flex;gap:10px;margin-top:18px}
+    .btn{
+      border:1px solid #e5e7eb;background:#fff;color:var(--text);
+      padding:12px 16px;border-radius:12px;font-weight:600;cursor:pointer;
     }
-    @media (max-width:880px){
-      nav ul{display:none} .menu-btn{display:block}
-      .hero-inner{grid-template-columns:1fr; text-align:center}
-      .actions{justify-content:center}
-      .about .wrap{grid-template-columns:1fr}
-      .services-grid{grid-template-columns:repeat(2,1fr)}
-      .steps{grid-template-columns:1fr}
-      .contact-wrap{grid-template-columns:1fr}
-      .planet{width:78vw}
+    .btn:hover{border-color:#cbd5e1}
+    .btn-primary{background:var(--blue);color:white;border-color:var(--blue);box-shadow:var(--shadow)}
+    .btn-primary:hover{filter:brightness(.96)}
+    .btn-red{background:var(--red);color:#fff;border-color:var(--red)}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+    .kpi{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow)}
+    .kpi b{font-size:16px}
+    .panel{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:var(--shadow)}
+    .panel.pad{padding:16px}
+
+    .section{padding:26px 0}
+    .section h2{font-size:22px;margin:0 0 10px 0}
+    .grid{display:grid;gap:14px}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media(max-width:1024px){.grid.cols-4{grid-template-columns:repeat(3,minmax(0,1fr));}}
+    @media(max-width:780px){.grid.cols-3,.grid.cols-4{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media(max-width:520px){.grid.cols-3,.grid.cols-4{grid-template-columns:repeat(1,minmax(0,1fr));}}
+
+    /* Cards */
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card .thumb{position:relative;aspect-ratio:1/1;background:#eef2f7}
+    .card .thumb img{object-fit:cover;width:100%;height:100%}
+    .card .body{padding:12px}
+    .brand{font-size:12px;color:var(--muted)}
+    .title-sm{font-weight:600;margin:6px 0}
+    .price{display:flex;gap:8px;align-items:baseline}
+    .price .now{font-weight:700}
+    .price .was{font-size:13px;color:#94a3b8;text-decoration:line-through}
+    .stars{color:#f59e0b}
+    .pill{background:#f1f5f9;border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px;font-size:13px}
+    .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .sale-badge{position:absolute;left:10px;top:10px;background:var(--red);color:#fff;font-weight:700;border-radius:999px;padding:4px 8px;font-size:12px}
+    .new-badge{position:absolute;right:10px;top:10px;background:var(--blue);color:#fff;font-weight:700;border-radius:999px;padding:4px 8px;font-size:12px}
+
+    /* Filters + layout */
+    .layout{display:grid;grid-template-columns:280px 1fr;gap:16px}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}}
+    .filter .row{margin-bottom:14px}
+    .filter label{display:block;font-size:13px;color:#64748b;margin-bottom:6px}
+    .range{display:flex;gap:10px;align-items:center}
+    input[type="range"]{width:100%}
+
+    /* Tables */
+    table{width:100%;border-collapse:collapse}
+    th,td{border-bottom:1px solid #e5e7eb;padding:10px;text-align:left}
+    th{background:#f8fafc}
+
+    /* Toast */
+    .toast{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:100}
+    .toast .t{background:#0f172a;color:#e2e8f0;padding:10px 14px;border-radius:10px;box-shadow:var(--shadow);opacity:.98}
+
+    /* Badges + chips */
+    .chip{display:inline-flex;align-items:center;gap:6px;background:#eef2f7;padding:8px 10px;border-radius:999px;border:1px solid #e5e7eb}
+
+    /* Forms */
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field input,.field select,.field textarea{
+      padding:11px 12px;border:1px solid #e5e7eb;border-radius:10px;outline:none;background:#fff
     }
-    @media (max-width:560px){ .services-grid{grid-template-columns:1fr} h1{font-size:34px} }
-    @media (prefers-reduced-motion:reduce){
-      .planet,.dots,.marquee .track{animation:none}
-      .service-card:hover{transform:none}
-      .has-io .reveal{transition:none}
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,135,245,.1)
     }
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:640px){ .row{grid-template-columns:1fr} }
 
-    /* ===== Responsive overrides for index (paste at the end) ===== */
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+    .right{text-align:right}
+    .mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}.mt-30{margin-top:30px}
 
-/* Global container + spacing */
-.container{
-  max-width: var(--container);
-  padding-inline: clamp(14px, 2.4vw, 24px);
-}
-section[id]{ scroll-margin-top: 90px; }   /* sticky header offset */
-img, svg, video{ max-width:100%; height:auto; display:block }
+    .divider{height:1px;background:#e5e7eb;margin:14px 0}
 
-/* Typo scale */
-h1{ font-size: clamp(30px, 6.2vw, 64px); line-height:1.08; margin: 12px 0 }
-h2{ font-size: clamp(22px, 3.2vw, 34px) }
-h3{ font-size: clamp(18px, 2.2vw, 22px) }
-p{ line-height: 1.85; margin: 0 0 16px }
+    /* Sticky checkout summary */
+    .sticky-box{position:sticky;top:86px}
 
-/* Let long labels wrap on small screens */
-.btn, .chip, .learn-more{ white-space: normal }
+    /* Search suggest */
+    .suggest{position:absolute;top:44px;left:0;right:0;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:var(--shadow);overflow:hidden;display:none;z-index:20}
+    .suggest ul{list-style:none;margin:0;padding:6px}
+    .suggest li{padding:8px 10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .suggest li:hover{background:#f8fafc}
 
-/* Hero visuals */
-.planet{ width: clamp(280px, 46vw, 520px) }
-.hero{ padding: clamp(64px, 8vw, 110px) 0 clamp(84px, 10vw, 120px) }
-.scroll-ind{ pointer-events:none }
-
-/* Grids (desktop defaults) */
-.services-grid{ grid-template-columns: repeat(4,1fr) }
-.steps{ grid-template-columns: repeat(6,1fr) }
-.why .grid{ grid-template-columns: repeat(3,1fr) }
-.products-grid{ grid-template-columns: 1.1fr .9fr }
-.product{ grid-template-columns: .9fr 1.1fr }
-.contact-wrap{ grid-template-columns: .9fr 1.1fr }
-
-/* Laptop / large tablet */
-@media (max-width: 1180px){
-  /* Hero becomes single column */
-  .hero-inner{ grid-template-columns: 1fr !important; text-align:center }
-  .actions, .stacks{ justify-content:center }
-  .planet{ margin-inline:auto }
-
-  /* Collapse grids */
-  .services-grid{ grid-template-columns: repeat(3,1fr) }
-  .steps{ grid-template-columns: repeat(3,1fr) }
-  .why .grid{ grid-template-columns: repeat(2,1fr) }
-  .products-grid{ grid-template-columns: 1fr }
-  .product{ grid-template-columns: 1fr }
-  .contact-wrap{ grid-template-columns: 1fr }
-}
-
-/* Tablet portrait / big phones */
-@media (max-width: 880px){
-  section{ padding: clamp(64px, 9vw, 100px) 0 }
-
-  .services-grid{ grid-template-columns: repeat(2,1fr) }
-  .steps{ grid-template-columns: 1fr; gap: 14px }
-  .why .grid{ grid-template-columns: 1fr }
-  .logo-row{ grid-template-columns: 1fr }      /* product logos */
-  .planet{ width: clamp(260px, 70vw, 480px) }
-
-  /* Nav: hide desktop menu, show hamburger */
-  header nav ul{ display:none !important }
-  .menu-btn{ display:block !important }
-}
-
-/* Small phones */
-@media (max-width: 560px){
-  h1{ font-size: clamp(28px, 9vw, 34px) }
-  .services-grid{ grid-template-columns: 1fr }
-  .btn{ padding: 10px 12px; font-size: 14px }
-  .chip{ padding: 6px 10px; font-size: 12px }
-  .planet{ width: min(78vw, 420px) }
-  footer.container{ flex-direction: column; gap: 8px; text-align:center }
-}
-
-/* Orientation tweak (landscape phones) */
-@media (max-width: 880px) and (orientation: landscape){
-  .planet{ width: clamp(220px, 42vw, 360px) }
-  .hero{ padding-block: 70px }
-}
-
-/* Accessibility / motion */
-@media (hover: none){
-  .service-card:hover{ transform: translateY(-6px) } /* disable 3D tilt on touch */
-}
-@media (prefers-reduced-motion: reduce){
-  .btn:hover, .service-card:hover{ transform:none }
-}
-
-/* Ensure transparent bars don't create visible lines */
-.tagline-bar, .marquee, .process{
-  background: transparent !important;
-  border-top: 0;
-  border-bottom: 0;
-}
-/* Fix right-side extra space in hero + make layout tighter on smaller screens */
-
-/* Always prevent horizontal scroll leaks */
-html, body { overflow-x: hidden !important; }
-
-/* If any visual (planet/orbs/blur) overflows, clip inside hero */
-.hero { overflow: hidden; }
-
-/* Collapse hero grid earlier so 2nd column (planet) doesn't reserve empty space */
-@media (max-width: 1200px){
-  .hero-inner{
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-    text-align: center !important;
-  }
-  .hero-inner > div{ justify-self: center; }
-  .actions, .stacks{ justify-content: center !important; }
-  .planet{ 
-    margin-inline: auto !important;
-    width: clamp(280px, 62vw, 480px) !important;
-  }
-}
-
-/* Tablet/phone tweaks */
-@media (max-width: 880px){
-  section{ padding: clamp(64px, 9vw, 100px) 0; }
-  /* Ensure containers never push width */
-  .container{ max-width: 100%; padding-inline: clamp(14px, 2.4vw, 24px); }
-  /* Hide desktop menu; show hamburger (you already have this, keep as safety) */
-  header nav ul{ display: none !important; }
-  .menu-btn{ display: block !important; }
-}
-
-/* Small phones */
-@media (max-width: 560px){
-  h1{ font-size: clamp(28px, 9vw, 34px); }
-  .planet{ width: min(78vw, 420px); }
-  .btn{ padding: 10px 12px; font-size: 14px; }
-  .chip{ padding: 6px 10px; font-size: 12px; }
-}
-
-/* If you still notice a tiny shift on some devices due to fixed effects */
-#particles, .cursor-glow{ max-width: 100vw; overflow: hidden; }
-
-/* Touch devices: avoid heavy tilt that can cause sub-pixel overflow */
-@media (hover: none){
-  .service-card:hover{ transform: translateY(-6px); }
-}
-
-/* ==== FIX: remove "extra layer" edges on left/right in hero ==== */
-
-/* prevent any horizontal scroll globally */
-html, body { overflow-x: hidden !important; }
-
-/* make hero visuals not clipped (before it was hidden => sharp edges) */
-.hero { overflow: visible !important; }
-
-/* orbs/cosmetic blobs never capture pointer and can overflow safely */
-.orb { pointer-events: none !important; }
-
-/* keep particles/cursor-glow inside viewport width */
-#particles, .cursor-glow { max-width: 100vw; overflow: hidden; }
-
-/* If you previously added hero { overflow:hidden }, this overrides it.
-   You can keep container spacing tighter without clipping visuals. */
-
-/* Also collapse hero grid earlier so the second column doesn’t leave empty reserved space */
-@media (max-width: 1200px){
-  .hero-inner{
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-    text-align: center !important;
-  }
-  .hero-inner > div{ justify-self: center; }
-  .actions, .stacks{ justify-content: center !important; }
-  .planet{ margin-inline: auto !important; width: clamp(280px, 62vw, 480px) !important; }
-}
-
-/* small screens refinement */
-@media (max-width: 560px){
-  .planet{ width: min(78vw, 420px); }
-}
-    
+    /* Mini label */
+    .label{font-size:12px;color:#64748b}
   </style>
 </head>
 <body>
-  <div class="progress" id="progress"></div>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-  <canvas id="particles"></canvas>
+  <div class="topbar">
+    <div class="container">
+      <div>🚚 1500৳+ অর্ডারে ফ্রি শিপিং • 7 দিনের মধ্যে রিটার্ন</div>
+      <div>BN/EN • BDT</div>
+    </div>
+  </div>
 
   <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span style="font-family:'Space Grotesk',sans-serif">Bridge Byte Tech</span>
+    <div class="container header-wrap">
+      <a href="#/" class="logo" aria-label="RSway home">
+        <span style="color:var(--blue)">RSway</span>
+        <span class="cartmark">🛒</span>
+      </a>
+
+      <div class="search" style="position:relative">
+        <input id="searchInput" type="search" placeholder="পণ্য সার্চ করুন..." autocomplete="off" />
+        <div class="suggest" id="searchSuggest"></div>
       </div>
-      <nav aria-label="Primary">
-        <ul>
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="product.html">Products</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="insight.html">Insights</a></li>
-          <li><button class="cta magnetic"><i class="ri-send-plane-2-line"></i> Get Proposal</button></li>
-        </ul>
-      </nav>
-      <button class="menu-btn" aria-label="Open menu"><i class="ri-menu-line"></i></button>
+
+      <div class="actions">
+        <a class="icon-btn" href="#/wishlist" title="Wishlist">🤍 <span class="label">Wishlist</span> <span class="badge" id="wishCount">0</span></a>
+        <a class="icon-btn" href="#/compare" title="Compare">📊 <span class="label">Compare</span> <span class="badge" id="cmpCount">0</span></a>
+        <a class="icon-btn" href="#/cart" title="Cart">🛒 <span class="label">Cart</span> <span class="badge" id="cartCount">0</span></a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <!-- HERO has the #home anchor -->
-    <section class="hero container" id="home">
-      <div class="orb cyan"></div>
-      <div class="orb violet"></div>
-      <div class="orb pink"></div>
+<main id="app">
+  <!-- RSway: Scoped styles only for #app -->
+  <style>
+    #app{font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial}
+    #app :root{--rs-blue:#2387F5; --rs-red:#E2252F; --rs-soft:#F6F8FB; --rs-text:#0E1117; --rs-muted:#475569; --rs-card:#FFFFFF; --rs-border:#E5EAF0}
+    #app .rs-container{max-width:1200px;margin:0 auto;padding:0 16px}
+    #app .rs-section{padding:28px 0}
+    #app .rs-title{margin:0 0 8px;font-size:28px;font-weight:700;color:var(--rs-text)}
+    #app .rs-sub{color:var(--rs-muted);margin:0 0 14px}
+    #app .rs-hero{background:linear-gradient(180deg,#FFF, var(--rs-soft));padding:36px 0}
+    #app .rs-hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:24px}
+    #app .rs-hero h1{font-size:36px;line-height:1.15;margin:0 0 10px}
+    #app .rs-cta{display:flex;gap:10px;margin-top:16px}
+    #app .rs-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1px solid transparent;background:var(--rs-blue);color:#fff;font-weight:600;text-decoration:none}
+    #app .rs-btn.secondary{background:#fff;color:var(--rs-text);border-color:var(--rs-border)}
+    #app .rs-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    #app .rs-badge{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--rs-border);border-radius:12px;padding:10px}
+    #app .rs-card{background:#fff;border:1px solid var(--rs-border);border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,.06)}
+    #app .rs-grid{display:grid;gap:16px}
+    #app .cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    #app .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    #app .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:900px){#app .rs-hero-grid{grid-template-columns:1fr} #app .cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:560px){#app .cols-3,#app .cols-4{grid-template-columns:1fr}}
+    #app .rs-cat{display:flex;gap:12px;align-items:center;padding:14px}
+    #app .rs-cat .ico{font-size:22px}
+    #app .rs-cat .nm{font-weight:600}
+    #app .rs-product{padding:12px;display:flex;flex-direction:column}
+    #app .rs-thumb{background:#F2F5FA;border-radius:10px;overflow:hidden;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;position:relative}
+    #app .rs-pill{position:absolute;left:8px;top:8px;background:var(--rs-red);color:#fff;border-radius:999px;font-size:12px;padding:4px 8px}
+    #app .rs-pill.blue{background:var(--rs-blue)}
+    #app .rs-ptitle{font-weight:600;margin:10px 0 4px}
+    #app .rs-muted{color:var(--rs-muted);font-size:14px}
+    #app .rs-price{display:flex;gap:8px;align-items:center;margin-top:6px}
+    #app .rs-compare{text-decoration:line-through;color:#94A3B8}
+    #app .rs-stars{color:#F59E0B;font-size:13px;margin-top:6px}
+    #app .rs-actions{display:flex;gap:8px;margin-top:10px}
+    #app .rs-sm{flex:1;text-align:center;padding:8px;border-radius:10px;border:1px solid var(--rs-border);background:#fff;color:var(--rs-blue);text-decoration:none;font-weight:600}
+    #app .rs-sm.primary{background:var(--rs-blue);color:#fff;border-color:var(--rs-blue)}
+    #app .rs-banner{display:flex;align-items:center;justify-content:center;min-height:160px;background:linear-gradient(90deg,#ECF3FF, #FEE2E2);border:1px dashed #C7D2FE;border-radius:12px;padding:16px;text-align:center}
+  </style>
 
-      <div class="hero-inner">
-        <div>
-          <span class="eyebrow"><i class="ri-rocket-2-line"></i>Turn vision into technology</span>
-          <span class="eyebrow"><i class="ri-rocket-2-line"></i>Let's introduce something new!</span>
-          <h1><span id="scramble">Bridge Byte Tech</span></h1>
-          <p>We build reliable, scalable and beautiful digital products from high‑performance web & mobile apps to cloud & DevOps, UI/UX and consulting.</p>
-          <p>Bridge Byte Tech empowers businesses with innovative, reliable, and scalable digital solutions that connect technology with growth.</p>
-
-          <div class="actions">
-            <a class="btn primary magnetic" href="contact.html"><i class="ri-chat-1-line"></i> Start a Project</a>
-            <a class="btn magnetic" href="services.html"><i class="ri-magic-line"></i> Explore Services</a>
-          </div>
-
-          <div class="stacks">
-            <span class="chip"><i class="ri-stack-line"></i> Spring Boot • React.js • Next.js</span>
-            <span class="chip"><i class="ri-smartphone-line"></i> Flutter • Kotlin</span>
-            <span class="chip"><i class="ri-cloud-line"></i> AWS • GCP • Azure</span>
-            <span class="chip"><i class="ri-git-branch-line"></i> CI/CD • DevOps</span>
-          </div>
+  <!-- HERO -->
+  <section class="rs-hero">
+    <div class="rs-container rs-hero-grid">
+      <div>
+        <h1>Buy your dream products at RSway</h1>
+        <p class="rs-sub">Free returns • Cash on delivery • Best price guaranteed</p>
+        <div class="rs-cta">
+          <a href="#all-products" class="rs-btn">Shop Now</a>
+          <a href="#deals" class="rs-btn secondary">Hot Deals</a>
         </div>
-        <div>
-          <div class="planet" aria-hidden="true">
-            <div class="ring"></div>
-            <div class="dots"></div>
-          </div>
+        <div class="rs-badges">
+          <div class="rs-badge">🚚 <div><strong>Fast delivery</strong><div class="rs-muted">Dhaka 1–2 days</div></div></div>
+          <div class="rs-badge">🔁 <div><strong>Easy returns</strong><div class="rs-muted">7‑day policy</div></div></div>
+          <div class="rs-badge">🔒 <div><strong>Secure pay</strong><div class="rs-muted">bKash • Nagad • Card • COD</div></div></div>
         </div>
       </div>
-    </section>
-
-    <div class="marquee">
-      <div class="container">
-        <div class="track" aria-hidden="true">
-          <span class="tag"><i class="ri-shield-check-line"></i> Secure-by-default</span>
-          <span class="tag"><i class="ri-cloud-line"></i> Cloud-native & scalable</span>
-          <span class="tag"><i class="ri-plug-2-line"></i> API-first architecture</span>
-          <span class="tag"><i class="ri-git-branch-line"></i> CI/CD automation</span>
-          <span class="tag"><i class="ri-speed-up-line"></i> Performance 95+ targets</span>
-          <span class="tag"><i class="ri-lock-2-line"></i> Privacy-first data</span>
-          <span class="tag"><i class="ri-accessibility-line"></i> Accessibility AA+</span>
-          <span class="tag"><i class="ri-pulse-line"></i> Observability & SRE</span>
-          <span class="tag"><i class="ri-smartphone-line"></i> PWA & offline-ready</span>
-          <span class="tag"><i class="ri-search-eye-line"></i> SEO & structured data</span>
-          <span class="tag"><i class="ri-shield-keyhole-line"></i> OWASP Top 10 aligned</span>
-          <span class="tag"><i class="ri-code-line"></i> Clean, maintainable code</span>
+      <div class="rs-card" style="display:flex;align-items:center;justify-content:center;">
+        <div>
+          <div style="font-size:48px;text-align:center">🛍️</div>
+          <p class="rs-muted" style="text-align:center;margin:8px 0 0">Comfort-first UI • RS Blue actions • Red cart highlights</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="about container">
-      <h2 class="section-title reveal">About Us</h2>
-      <p>Bridge Byte Tech is a forward‑thinking engineering studio delivering innovative, reliable, and scalable solutions. We translate business goals into technology outcomes through strategy, design, and engineering.</p>
+  <!-- FEATURED CATEGORIES -->
+  <section class="rs-section" id="categories">
+    <div class="rs-container">
+      <h2 class="rs-title">Featured Categories</h2>
+      <p class="rs-sub">Cosmetics, Jewellery, Sneakers and more</p>
+      <div class="rs-grid cols-4">
+        <a class="rs-card rs-cat" href="#cat-cosmetics"><div class="ico">💄</div><div><div class="nm">Cosmetics</div><div class="rs-muted">Makeup, skincare</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-jewellery"><div class="ico">💎</div><div><div class="nm">Jewellery</div><div class="rs-muted">Necklace, earrings</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-sneakers"><div class="ico">👟</div><div><div class="nm">Sneakers</div><div class="rs-muted">Running, casual</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-electronics"><div class="ico">🎧</div><div><div class="nm">Electronics</div><div class="rs-muted">Earbuds, smartwatches</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-home"><div class="ico">🏠</div><div><div class="nm">Home & Living</div><div class="rs-muted">Decor, lighting</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-accessories"><div class="ico">🎒</div><div><div class="nm">Accessories</div><div class="rs-muted">Bags, wallets</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-beauty-tools"><div class="ico">🖌️</div><div><div class="nm">Beauty Tools</div><div class="rs-muted">Brushes & more</div></div></a>
+        <a class="rs-card rs-cat" href="#cat-perfume"><div class="ico">🌸</div><div><div class="nm">Perfume</div><div class="rs-muted">EDP & mists</div></div></a>
+      </div>
+    </div>
+  </section>
 
-      <div class="wrap">
-        <div class="card reveal">
-          <p>We specialize in full‑cycle software development, modern web design & development, UI/UX, cloud & DevOps, and technology consulting. Our mission is to turn ambitious ideas into impactful digital products with a clear focus on performance, security, and delightful user experience.</p>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; justify-content:center">
-            <span class="chip"><i class="ri-shield-check-line"></i> Secure</span>
-            <span class="chip"><i class="ri-rocket-line"></i> Performance‑first</span>
-            <span class="chip"><i class="ri-team-line"></i> Agile & Collaborative</span>
-            <span class="chip"><i class="ri-cloud-line"></i> Cloud‑native</span>
-          </div>
-          <div class="metrics">
-            <div class="metric"><div class="num counter" data-target="0.5">0</div><div class="label">Years in business</div></div>
-            <div class="metric"><div class="num counter" data-target="04">0</div><div class="label">Projects delivered</div></div>
-            <div class="metric"><div class="num counter" data-target="99">0</div><div class="label">Client satisfaction (%)</div></div>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <p class="split">Our culture is simple: understand the problem deeply, communicate clearly, and ship value every week. Whether you’re an early‑stage startup or an enterprise team, we help you reduce risk and move faster — without compromising quality.</p>
-          <p class="split">We obsess over performance, accessibility, and security — the foundations of a premium product. When you work with us, you get a long‑term tech partner committed to your success.</p>
+  <!-- DEALS BANNER -->
+  <section class="rs-section" id="deals">
+    <div class="rs-container">
+      <div class="rs-banner rs-card">
+        <div>
+          <div style="font-size:20px;font-weight:700;margin-bottom:6px;color:var(--rs-blue)">🔥 Deals of the Day</div>
+          <div class="rs-muted">Extra 10% off with code <span style="background:#ECF3FF;border:1px dashed var(--rs-blue);border-radius:8px;padding:2px 8px;color:var(--rs-blue)">SAVE10</span> • Free shipping over ৳3,000</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SERVICES -->
-    <section id="services" class="container">
-      <h2 class="section-title reveal">Services</h2>
-      <p class="lead reveal split">From discovery to deployment and beyond — end‑to‑end solutions tailored to your business.</p>
-
-      <div class="services-grid">
-        <article class="service-card reveal tilt">
-          <span class="badge">Design</span>
-          <div class="icon"><i class="ri-palette-2-line"></i></div>
-          <h3>UI/UX Design</h3>
-          <p>Human-centered design, journeys, high-fidelity UI, prototypes, and complete design systems for consistent experiences.</p>
-          <a class="learn-more" href="ui-ux.html">
-            Learn more <i class="ri-arrow-right-up-line"></i>
-          </a>
+  <!-- BEST SELLERS (mixed) -->
+  <section class="rs-section" id="all-products">
+    <div class="rs-container">
+      <h2 class="rs-title">Best Sellers</h2>
+      <p class="rs-sub">Top‑rated picks across all categories</p>
+      <div class="rs-grid cols-4">
+        <!-- Cosmetics -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill">Sale</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Veluxe+Matte+Lipstick" alt="Veluxe Matte Lipstick">
+          </div>
+          <div class="rs-ptitle">Veluxe Matte Lipstick</div>
+          <div class="rs-muted">Cosmetics • Veluxe</div>
+          <div class="rs-price"><strong>৳ 990</strong><span class="rs-compare">৳ 1290</span></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
         </article>
 
-        <article class="service-card reveal tilt">
-          <span class="badge">Web</span>
-          <div class="icon"><i class="ri-layout-2-line"></i></div>
-          <h3>Web Apps</h3>
-          <p>React/Next.js & TypeScript with SSR/ISR, accessibility, analytics, and SEO baked in from day one.</p>
-          <a class="learn-more" href="web-apps.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill blue">New</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Glow+Serum+30ml" alt="Glow Serum 30ml">
+          </div>
+          <div class="rs-ptitle">Glow Serum 30ml</div>
+          <div class="rs-muted">Cosmetics • Lumina</div>
+          <div class="rs-price"><strong>৳ 1490</strong></div>
+          <div class="rs-stars">★★★★★ 4.8</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
         </article>
 
-        <article class="service-card reveal tilt">
-          <span class="badge">Mobile</span>
-          <div class="icon"><i class="ri-smartphone-line"></i></div>
-          <h3>Mobile Apps</h3>
-          <p>Spring Boot at the core. Flutter/Kotlin apps with native feel, offline-first data, clean architecture, smooth animations.</p>
-          <a class="learn-more" href="mobile.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        <!-- Jewellery -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Silver+Pendant" alt="Sterling Silver Pendant">
+          </div>
+          <div class="rs-ptitle">Sterling Silver Pendant</div>
+          <div class="rs-muted">Jewellery • Aurelia</div>
+          <div class="rs-price"><strong>৳ 2490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
         </article>
 
-        <article class="service-card reveal tilt">
-          <span class="badge">Cloud</span>
-          <div class="icon"><i class="ri-cloud-line"></i></div>
-          <h3>Cloud & DevOps</h3>
-          <p>AWS/GCP/Azure, containerization, IaC, CI/CD, observability, and cost optimization for reliable scale.</p>
-          <a class="learn-more" href="cloud-devops.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Hoop+Earrings" alt="Gold Plated Hoop Earrings">
+          </div>
+          <div class="rs-ptitle">Gold Plated Hoop Earrings</div>
+          <div class="rs-muted">Jewellery • Aurelia</div>
+          <div class="rs-price"><strong>৳ 1890</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
         </article>
 
-        <article class="service-card reveal tilt">
-          <span class="badge">Backend</span>
-          <div class="icon"><i class="ri-database-2-line"></i></div>
-          <h3>APIs & Platforms</h3>
-          <p>Secure REST/GraphQL, microservices, event‑driven systems with robust tests and documentation.</p>
-          <a class="learn-more" href="apis-platforms.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        <!-- Sneakers -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill">Sale</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS+Runner+Pro" alt="RS Runner Pro">
+          </div>
+          <div class="rs-ptitle">RS Runner Pro</div>
+          <div class="rs-muted">Sneakers • RSway</div>
+          <div class="rs-price"><strong>৳ 4490</strong><span class="rs-compare">৳ 4990</span></div>
+          <div class="rs-stars">★★★★★ 4.7</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
         </article>
 
-        <article class="service-card reveal tilt">
-          <span class="badge">AI</span>
-          <div class="icon"><i class="ri-brain-line"></i></div>
-          <h3>AI & Automation</h3>
-          <p>LLM integration, retrieval (RAG), workflow automation, and smart tooling to boost productivity.</p>
-          <a class="learn-more" href="ai-automation.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Street+Court+Classic" alt="Street Court Classic">
+          </div>
+          <div class="rs-ptitle">Street Court Classic</div>
+          <div class="rs-muted">Sneakers • RSway</div>
+          <div class="rs-price"><strong>৳ 3990</strong></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
         </article>
 
-        <article class="service-card reveal tilt">
-          <span class="badge">Quality</span>
-          <div class="icon"><i class="ri-shield-check-line"></i></div>
-          <h3>QA & Security</h3>
-          <p>Automation suites, performance testing, SAST/DAST, and secure SDLC — ship with confidence.</p>
-          <a class="learn-more" href="qa-security.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        <!-- Electronics -->
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <span class="rs-pill">Sale</span>
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS-Buds+Wireless" alt="RS-Buds Wireless Earbuds">
+          </div>
+          <div class="rs-ptitle">RS‑Buds Wireless</div>
+          <div class="rs-muted">Electronics • RSway</div>
+          <div class="rs-price"><strong>৳ 3490</strong><span class="rs-compare">৳ 3990</span></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
         </article>
 
-        <article class="service-card reveal tilt">
-          <span class="badge">Advisory</span>
-          <div class="icon"><i class="ri-lightbulb-line"></i></div>
-          <h3>Tech Consulting</h3>
-          <p>Architecture reviews, roadmaps, audits, and team enablement aligned with your goals.</p>
-          <a class="learn-more" href="consulting.html">Learn more <i class="ri-arrow-right-up-line"></i></a>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb">
+            <img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS+Smartwatch+Lite" alt="RS Smartwatch Lite">
+          </div>
+          <div class="rs-ptitle">RS Smartwatch Lite</div>
+          <div class="rs-muted">Electronics • RSway</div>
+          <div class="rs-price"><strong>৳ 6990</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PRODUCTS -->
-    <section id="products" class="container">
-      <h2 class="section-title reveal">Products</h2>
-      <p class="lead reveal split">We build digital experiences. Explore our flagship product and a recent collaboration.</p>
+  <!-- CATEGORY HIGHLIGHTS -->
+  <section class="rs-section" id="cat-cosmetics">
+    <div class="rs-container">
+      <h2 class="rs-title">Cosmetics</h2>
+      <p class="rs-sub">Makeup, skincare and daily essentials</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Daily+Moisturizer" alt="Daily Hydrating Moisturizer"></div>
+          <div class="rs-ptitle">Daily Hydrating Moisturizer</div>
+          <div class="rs-muted">Nova</div>
+          <div class="rs-price"><strong>৳ 1190</strong></div>
+          <div class="rs-stars">★★★★★ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Glow+Serum" alt="Glow Serum 30ml"></div>
+          <div class="rs-ptitle">Glow Serum 30ml</div>
+          <div class="rs-muted">Lumina</div>
+          <div class="rs-price"><strong>৳ 1490</strong></div>
+          <div class="rs-stars">★★★★★ 4.8</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Pro+Brush+Set" alt="Pro Makeup Brush Set"></div>
+          <div class="rs-ptitle">Pro Makeup Brush Set (12 pcs)</div>
+          <div class="rs-muted">Veluxe</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Veluxe+Lipstick" alt="Veluxe Matte Lipstick"></div>
+          <div class="rs-ptitle">Veluxe Matte Lipstick</div>
+          <div class="rs-muted">Veluxe</div>
+          <div class="rs-price"><strong>৳ 990</strong> <span class="rs-compare">৳ 1290</span></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-      <div class="products-grid">
-        <div class="product reveal">
-          <div class="p-media">
-            <img src="splogo.png" alt="SylhetPedia Logo">
-          </div>
-          <div class="p-body">
-            <h3>SylhetPedia — Sylhet A–Z in your pocket</h3>
-            <p>Find everything about Sylhet in one place, services, places, businesses, food, events, emergency contacts, maps and more. Built with a Bangla‑first experience for the people of Sylhet.</p>
-            <div class="p-tags">
-              <span class="chip"><i class="ri-stack-line"></i> Spring Boot • SQL • AWS</span>
-              <span class="chip"><i class="ri-smartphone-line"></i> Kotlin</span>
-              <span class="chip"><i class="ri-map-pin-2-line"></i> Local Directory</span>
-              <span class="chip"><i class="ri-translate-2"></i> Bangla UI</span>
-            </div>
-            <div class="p-actions">
-              <a href="product.html" class="btn primary magnetic"><i class="ri-external-link-line"></i> Visit product</a>
-              <a href="product.html" class="btn magnetic"><i class="ri-google-play-line"></i> Get on Play Store</a>
-            </div>
-          </div>
+  <section class="rs-section" id="cat-jewellery">
+    <div class="rs-container">
+      <h2 class="rs-title">Jewellery</h2>
+      <p class="rs-sub">Elegant everyday pieces</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Silver+Pendant" alt="Sterling Silver Pendant"></div>
+          <div class="rs-ptitle">Sterling Silver Pendant</div>
+          <div class="rs-muted">Aurelia</div>
+          <div class="rs-price"><strong>৳ 2490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Hoop+Earrings" alt="Gold Plated Hoop Earrings"></div>
+          <div class="rs-ptitle">Gold Plated Hoop Earrings</div>
+          <div class="rs-muted">Aurelia</div>
+          <div class="rs-price"><strong>৳ 1890</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Pearl+Bracelet" alt="Classic Pearl Bracelet"></div>
+          <div class="rs-ptitle">Classic Pearl Bracelet</div>
+          <div class="rs-muted">Pearla</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★★ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Minimal+Ring" alt="Minimal Silver Ring"></div>
+          <div class="rs-ptitle">Minimal Silver Ring</div>
+          <div class="rs-muted">Aurelia</div>
+          <div class="rs-price"><strong>৳ 1290</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-sneakers">
+    <div class="rs-container">
+      <h2 class="rs-title">Sneakers</h2>
+      <p class="rs-sub">Run, walk, or chill — we got you</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Runner+Pro" alt="RS Runner Pro"></div>
+          <div class="rs-ptitle">RS Runner Pro</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 4490</strong> <span class="rs-compare">৳ 4990</span></div>
+          <div class="rs-stars">★★★★★ 4.7</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Court+Classic" alt="Street Court Classic"></div>
+          <div class="rs-ptitle">Street Court Classic</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 3990</strong></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Trail+Hiker" alt="TrailFlex Hiker"></div>
+          <div class="rs-ptitle">TrailFlex Hiker</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 5490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Slip-on" alt="Daily Slip‑on"></div>
+          <div class="rs-ptitle">Daily Slip‑on</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 3290</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-electronics">
+    <div class="rs-container">
+      <h2 class="rs-title">Electronics</h2>
+      <p class="rs-sub">Earbuds, wearables and more</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=RS-Buds" alt="RS-Buds Wireless"></div>
+          <div class="rs-ptitle">RS‑Buds Wireless</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 3490</strong> <span class="rs-compare">৳ 3990</span></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Smartwatch" alt="RS Smartwatch Lite"></div>
+          <div class="rs-ptitle">RS Smartwatch Lite</div>
+          <div class="rs-muted">RSway</div>
+          <div class="rs-price"><strong>৳ 6990</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Bluetooth+Speaker" alt="Portable Bluetooth Speaker"></div>
+          <div class="rs-ptitle">Portable Bluetooth Speaker</div>
+          <div class="rs-muted">Soundly</div>
+          <div class="rs-price"><strong>৳ 2290</strong></div>
+          <div class="rs-stars">★★★★☆ 4.1</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Power+Bank+10k" alt="Power Bank 10,000 mAh"></div>
+          <div class="rs-ptitle">Power Bank 10,000 mAh</div>
+          <div class="rs-muted">Volt</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-home">
+    <div class="rs-container">
+      <h2 class="rs-title">Home & Living</h2>
+      <p class="rs-sub">Make your space cozy</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Scented+Candle" alt="Aromatherapy Scented Candle"></div>
+          <div class="rs-ptitle">Aromatherapy Scented Candle</div>
+          <div class="rs-muted">Homely</div>
+          <div class="rs-price"><strong>৳ 890</strong></div>
+          <div class="rs-stars">★★★★★ 4.6</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Desk+Lamp" alt="Minimalist Desk Lamp"></div>
+          <div class="rs-ptitle">Minimalist Desk Lamp</div>
+          <div class="rs-muted">Homely</div>
+          <div class="rs-price"><strong>৳ 1990</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-accessories">
+    <div class="rs-container">
+      <h2 class="rs-title">Accessories</h2>
+      <p class="rs-sub">Everyday carry essentials</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Leather+Wallet" alt="Genuine Leather Wallet"></div>
+          <div class="rs-ptitle">Genuine Leather Wallet</div>
+          <div class="rs-muted">Crafto</div>
+          <div class="rs-price"><strong>৳ 1290</strong></div>
+          <div class="rs-stars">★★★★★ 4.5</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Minimal+Backpack" alt="Minimalist Backpack 20L"></div>
+          <div class="rs-ptitle">Minimalist Backpack 20L</div>
+          <div class="rs-muted">Crafto</div>
+          <div class="rs-price"><strong>৳ 2790</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-beauty-tools">
+    <div class="rs-container">
+      <h2 class="rs-title">Beauty Tools</h2>
+      <p class="rs-sub">Brushes and accessories</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Brush+Set" alt="Pro Makeup Brush Set"></div>
+          <div class="rs-ptitle">Pro Makeup Brush Set (12 pcs)</div>
+          <div class="rs-muted">Veluxe</div>
+          <div class="rs-price"><strong>৳ 1590</strong></div>
+          <div class="rs-stars">★★★★☆ 4.4</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Beauty+Sponge" alt="Beauty Sponge Duo"></div>
+          <div class="rs-ptitle">Beauty Sponge Duo</div>
+          <div class="rs-muted">BlendX</div>
+          <div class="rs-price"><strong>৳ 490</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-section" id="cat-perfume">
+    <div class="rs-container">
+      <h2 class="rs-title">Perfume</h2>
+      <p class="rs-sub">Long‑lasting fragrances</p>
+      <div class="rs-grid cols-4">
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=EDP+Mist" alt="Eau De Parfum Mist"></div>
+          <div class="rs-ptitle">Eau De Parfum Mist</div>
+          <div class="rs-muted">Lumina</div>
+          <div class="rs-price"><strong>৳ 2190</strong></div>
+          <div class="rs-stars">★★★★☆ 4.3</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Wishlist</a></div>
+        </article>
+        <article class="rs-card rs-product">
+          <div class="rs-thumb"><img src="https://placehold.co/600x600/F6F8FB/0E1117?text=Woody+EDP" alt="Woody Eau De Parfum"></div>
+          <div class="rs-ptitle">Woody Eau De Parfum</div>
+          <div class="rs-muted">Aroma</div>
+          <div class="rs-price"><strong>৳ 2390</strong></div>
+          <div class="rs-stars">★★★★☆ 4.2</div>
+          <div class="rs-actions"><a href="#" class="rs-sm primary">Add to cart</a><a href="#" class="rs-sm">Compare</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF / NEWSLETTER -->
+  <section class="rs-section">
+    <div class="rs-container">
+      <div class="rs-grid cols-2">
+        <div class="rs-card" style="padding:16px">
+          <h3 style="margin:0 0 8px">What customers say</h3>
+          <p class="rs-muted">“Sneaker quality is awesome, size fit perfectly. Delivery in 1 day!” — Farhan</p>
+          <p class="rs-muted">“Cosmetics are genuine and shades match perfectly. Love the packaging!” — Tasfia</p>
         </div>
-
-        <div class="partners reveal">
-          <h4>Collaborations</h4>
-          <p class="lead" style="margin-bottom:10px">Built in collaboration with our client: a modern, high‑performance website featured here.</p>
-          <div class="logo-row">
-            <a href="https://www.dfitcentre.com">
-            <div class="logo-card">
-              <img src="dflogo.png" alt="DF IT CENTRE">
-            </div>
-</a>
+        <div class="rs-card" style="padding:16px">
+          <h3 style="margin:0 0 8px">Subscribe & save</h3>
+          <p class="rs-muted">Get updates on new arrivals and exclusive coupons.</p>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <input type="email" placeholder="your@email.com" style="flex:1;border:1px solid var(--rs-border);border-radius:10px;padding:10px 12px;outline:none">
+            <a class="rs-btn" href="#">Subscribe</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+</main>
 
-    <!-- STRATEGY -->
-    <section id="process" class="process">
-      <div class="container">
-        <h2 class="section-title reveal">Our Strategy</h2>
-        <p class="lead reveal split">A clear, collaborative framework to move from discovery to growth, perfect for both products and platforms.</p>
-        <div class="timeline">
-          <div class="bar"><div class="fill" id="timelineFill"></div></div>
-          <div class="steps">
-            <div class="step reveal"><div class="circle">1</div><h4>Discovery</h4><p>Workshops, requirements, risks, success metrics.</p></div>
-            <div class="step reveal"><div class="circle">2</div><h4>Planning</h4><p>Scope, stories, architecture, roadmap.</p></div>
-            <div class="step reveal"><div class="circle">3</div><h4>Design</h4><p>Flows, wireframes, prototypes, design systems.</p></div>
-            <div class="step reveal"><div class="circle">4</div><h4>Development</h4><p>Sprints, code reviews, CI/CD, environments.</p></div>
-            <div class="step reveal"><div class="circle">5</div><h4>QA & Security</h4><p>Automation + manual, security checks, hardening.</p></div>
-            <div class="step reveal"><div class="circle">6</div><h4>Launch & Growth</h4><p>Release, monitoring, analytics, iteration.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY CHOOSE US -->
-    <section class="why container">
-      <h2 class="section-title reveal">Why choose us</h2>
-      <p class="lead reveal">Expertise that delivers - impact‑first, future‑ready</p>
+  <footer>
+    <div class="container" style="padding:28px 16px">
       <div class="grid">
-        <div class="item reveal"><i class="ri-award-line"></i><div><h4>Proven Expertise</h4><p>Startups to enterprises, we’ve shipped across domains.</p></div></div>
-        <div class="item reveal"><i class="ri-slideshow-3-line"></i><div><h4>Tailored Solutions</h4><p>We design around your goals and users, not fads.</p></div></div>
-        <div class="item reveal"><i class="ri-pulse-line"></i><div><h4>End‑to‑End</h4><p>Strategy, design, engineering, growth, one team.</p></div></div>
-        <div class="item reveal"><i class="ri-shield-check-line"></i><div><h4>Reliability & Trust</h4><p>Security, maintainability, and best practices baked in.</p></div></div>
-        <div class="item reveal"><i class="ri-speed-up-line"></i><div><h4>Performance</h4><p>Fast, accessible, measurable outcomes every sprint.</p></div></div>
-        <div class="item reveal"><i class="ri-planet-line"></i><div><h4>Future‑Ready</h4><p>Cloud‑native architectures and modern tooling.</p></div></div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="container">
-      <h2 class="section-title reveal">Get in touch</h2>
-      <p class="lead reveal split">Tell us about your project. We’ll reach out within 24 hours.</p>
-      <div class="contact-wrap">
-        <div class="card reveal">
-          <h3>Contact details</h3>
-          <ul class="contact-list" style="margin-top:10px">
-            <li><a href="mailto:support@bridgebytetech.com"><i class="ri-mail-line"></i> support@bridgebytetech.com</a></li>
-            <li><a href="tel:+8801722397554"><i class="ri-phone-line"></i> +880 1722397554</a></li>
-            <li><a href="tel:+33749797394"><i class="ri-phone-line"></i> +33 749797394</a></li>
-            <li><a href="https://maps.google.com/?q=Sylhet" target="_blank" rel="noopener"><i class="ri-map-pin-line"></i> Sylhet • Paris • Remote Worldwide</a></li>
-            <li><a href="#"><i class="ri-time-line"></i> Mon–Fri · 10:00–18:00</a></li>
-          </ul>
-          <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; justify-content:center">
-            <a class="chip social" href="https://github.com/bridgebytetech" target="_blank" rel="noopener"><i class="ri-github-line"></i> GitHub</a>
-            <a class="chip social" href="https://www.linkedin.com/company/bridge-byte-tech/" target="_blank" rel="noopener"><i class="ri-linkedin-fill"></i> LinkedIn</a>
-            <a class="chip social" href="#" target="_blank" rel="noopener"><i class="ri-twitter-x-line"></i> X / Twitter</a>
-          <a class="chip social" href="https://www.facebook.com/bridgebytetech" target="_blank" rel="noopener"><i class="ri-facebook-fill"></i> Facebook</a>
+        <div>
+          <div class="logo"><span style="color:var(--blue)">RSway</span><span class="cartmark">🛒</span></div>
+          <p class="muted mt-8">Fast delivery • Cash on Delivery • Easy Returns</p>
+          <div class="mt-12">
+            <span class="chip">🔒 Secure checkout</span>
+            <span class="chip">⭐ 4.8/5</span>
           </div>
         </div>
-<div class="card reveal">
-  <h3>Send a message</h3>
-  <form id="contactForm" onsubmit="sendMail(event)">
-    <input class="input" type="text" id="name" placeholder="Your name" required />
-    <input class="input" type="email" id="email" placeholder="Email address" required />
-    <input class="input" type="text" id="subject" placeholder="Subject" />
-    <textarea class="input" id="message" placeholder="Tell us about your project..." required></textarea>
-    <button class="gradient-btn magnetic" type="submit">
-      <i class="ri-send-plane-fill"></i> Send message
-    </button>
-  </form>
-</div>
+        <div>
+          <h4>Help</h4>
+          <div class="mt-8">
+            <div><a href="faq.html">FAQ</a></div>
+            <div><a href="contact.html">Contact</a></div>
+            <div><a href="#/track">Track Order</a></div>
+          </div>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <div class="mt-8">
+            <div><a href="about.html">About us</a></div>
+            <div><a href="blog.html">Blog</a></div>
+          </div>
+        </div>
+        <div>
+          <h4>Policy</h4>
+          <div class="mt-8">
+            <div><a href="#/shipping">Shipping</a></div>
+            <div><a href="#/return-policy">Return & Refund</a></div>
+            <div><a href="#/privacy">Privacy</a></div>
+            <div class="mt-12 muted">© <span id="year"></span> RSway</div>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
-
-  <div class="to-top" id="toTop" aria-label="Back to top"><i class="ri-arrow-up-line"></i></div>
-
-  <footer class="container">
-    <div>© <span class="year"></span> Bridge Byte Tech. All rights reserved.</div>
-    <div class="footer-links"><a href="#">Terms</a><a href="#">Privacy</a></div>
+    </div>
   </footer>
 
+  <div class="toast" id="toast"></div>
+
   <script>
-    const qs = s => document.querySelector(s);
-    const qsa = s => document.querySelectorAll(s);
+    // --- Utils ---
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+    const fmtBDT = n => `৳ ${Number(n).toLocaleString('bn-BD')}`;
+    const percent = (was, now) => Math.max(0, Math.round(100 - (now/was)*100));
+    const saveLS = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+    const loadLS = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } };
+    const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    const title = t => document.title = `${t} — RSway`;
+    const toast = (msg) => {
+      const wrap = $('#toast');
+      const el = document.createElement('div');
+      el.className = 't';
+      el.textContent = msg;
+      wrap.appendChild(el);
+      setTimeout(()=>{ el.remove(); }, 2200);
+    };
 
-    // Year
-    document.querySelector('.year').textContent = new Date().getFullYear();
-
-    // Mobile nav
-    const btn = qs('.menu-btn'); const mobileNav = document.createElement('div');
-    mobileNav.className = 'mobile-nav container'; mobileNav.id = 'mobileNav';
-    mobileNav.innerHTML = `
-      <a href="#home">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="product.html">Products</a>
-      <a href="contact.html">Contact</a>
-      <a href="insight.html">Insights</a>
-      <a class="cta" href="#contact"><i class="ri-send-plane-2-line"></i> Get Proposal</a>
-    `;
-    document.body.appendChild(mobileNav);
-    btn.addEventListener('click', ()=> mobileNav.classList.toggle('open'));
-    mobileNav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mobileNav.classList.remove('open')));
-
-    // Active nav highlighting (includes #home via hero section)
-    const sections = [...document.querySelectorAll('main section[id]')];
-    const links = [...document.querySelectorAll('header nav a[href^="#"]')];
-    function setActive(){
-      const y = window.scrollY + 120;
-      for(const s of sections){
-        const t = s.offsetTop, b = t + s.offsetHeight;
-        if(y >= t && y < b){
-          links.forEach(a=> a.classList.toggle('active', a.getAttribute('href') === '#' + s.id));
-        }
-      }
-    }
-    setActive(); addEventListener('scroll', setActive);
-
-    // Scroll progress
-    const progress = qs('#progress');
-    addEventListener('scroll', ()=>{
-      const max = document.documentElement.scrollHeight - innerHeight;
-      progress.style.width = (scrollY / max) * 100 + '%';
-    });
-
-    // Cursor glow follow + magnetic
-    const glow = qs('#cursorGlow');
-    let gx = innerWidth/2, gy = innerHeight/2, tx = gx, ty = gy;
-    function follow(){ gx += (tx-gx)*0.12; gy += (ty-gy)*0.12; glow.style.transform = `translate(${gx-130}px, ${gy-130}px)`; requestAnimationFrame(follow); }
-    follow();
-    addEventListener('pointermove', e=> { tx = e.clientX; ty = e.clientY; });
-    qsa('.magnetic').forEach(el=>{
-      const strength = 18;
-      el.addEventListener('mousemove', e=>{
-        const r = el.getBoundingClientRect(); const x = e.clientX - r.left - r.width/2; const y = e.clientY - r.top - r.height/2;
-        el.style.transform = `translate(${x/strength}px, ${y/strength}px)`;
-      });
-      el.addEventListener('mouseleave', ()=> el.style.transform = '');
-    });
-
-    // Reveal animations (only if supported)
-    if('IntersectionObserver' in window){
-      document.body.classList.add('has-io');
-
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} });
-      }, {threshold:0.15});
-      qsa('.reveal').forEach(el=> io.observe(el));
-
-      // Split text words
-      qsa('.split').forEach(el=>{
-        const words = el.textContent.trim().split(' ');
-        el.textContent = '';
-        words.forEach((w,i)=>{
-          const span = document.createElement('span');
-          span.className='word'; span.textContent = w + (i<words.length-1?' ':'');
-          span.style.transitionDelay = (i*18)+'ms';
-          el.appendChild(span);
-        });
-        const obs = new IntersectionObserver((ents)=>{
-          ents.forEach(en=>{ if(en.isIntersecting){ el.classList.add('show'); obs.unobserve(el);} });
-        }, {threshold:0.4});
-        obs.observe(el);
-      });
-    }
-
-    // Counters
-    const counters = qsa('.counter');
-    if('IntersectionObserver' in window){
-      const counterIO = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            const el = e.target; const target = +el.dataset.target; let v = 0;
-            const inc = Math.max(1, Math.floor(target/60));
-            const tick = ()=>{ v += inc; if(v>target) v=target; el.textContent = v + (target<20?'':'+'); if(v<target) requestAnimationFrame(tick); };
-            tick(); counterIO.unobserve(el);
-          }
-        });
-      }, {threshold:0.6});
-      counters.forEach(c=> counterIO.observe(c));
-    } else {
-      counters.forEach(c=> c.textContent = c.dataset.target + '+');
-    }
-
-    // Tilt on service cards
-    qsa('.service-card').forEach(card=>{
-      card.addEventListener('mousemove', e=>{
-        const r = card.getBoundingClientRect(); const x = e.clientX - r.left, y = e.clientY - r.top;
-        const rx = (y/r.height - .5) * -8; const ry = (x/r.width - .5) * 8;
-        card.style.transform = `translateY(-8px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
-      card.addEventListener('mouseleave', ()=> card.style.transform = '');
-    });
-
-    // Back to top
-    const toTop = qs('#toTop');
-    addEventListener('scroll', ()=> { scrollY > 700 ? toTop.classList.add('show') : toTop.classList.remove('show'); });
-    toTop.addEventListener('click', ()=> scrollTo({top:0, behavior:'smooth'}));
-
-    // Smooth scroll anchors
-    qsa('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href').slice(1), el = id && qs('#'+id);
-        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
-      });
-    });
-
-    // Scramble text (slow)
-    const scrambleEl = document.getElementById('scramble');
-    const phrases = [
-      "Bridge Byte Tech",
+    // --- Data ---
+    const CATEGORIES = [
+      { slug: 'electronics', name: 'Electronics', icon:'🔌', banner:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'fashion', name: 'Fashion', icon:'👗', banner:'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'home-living', name: 'Home & Living', icon:'🏡', banner:'https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'beauty', name: 'Beauty', icon:'💄', banner:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop' },
+      { slug: 'sports', name: 'Sports', icon:'🏃', banner:'https://images.unsplash.com/photo-1546484959-f9a53db79a41?q=80&w=1600&auto=format&fit=crop' },
     ];
-    const chars = "!<>-_\\/[]{}—=+*^?#________";
-    let pIndex = 0, frame = 0, queue = [], scrRAF;
-    function setText(newText){
-      const oldText = scrambleEl.textContent; const len = Math.max(oldText.length, newText.length);
-      queue = [];
-      for(let i=0;i<len;i++){
-        const from = oldText[i] || "", to = newText[i] || "";
-        const start = Math.floor(Math.random()*30), end = start + Math.floor(Math.random()*30);
-        queue.push({from,to,start,end,char:null});
-      }
-      cancelAnimationFrame(scrRAF); frame=0; update();
-    }
-    function update(){
-      let output="", complete=0;
-      for(let i=0;i<queue.length;i++){
-        let {from,to,start,end,char} = queue[i];
-        if(frame>=end){ complete++; output+=to; }
-        else if(frame>=start){ if(!char || Math.random()<.28) char = chars[Math.floor(Math.random()*chars.length)];
-          queue[i].char=char; output+=`<span style="color:#9fe8ff">${char}</span>`; }
-        else { output+=from; }
-      }
-      scrambleEl.innerHTML = output;
-      if(complete===queue.length){ setTimeout(()=>{ pIndex=(pIndex+1)%phrases.length; setText(phrases[pIndex]); }, 1800); }
-      else { scrRAF=requestAnimationFrame(update); frame++; }
-    }
-    setTimeout(()=> setText(phrases[0]), 400);
 
-    // Timeline progress
-    const fill = qs('#timelineFill'); const processSec = qs('#process');
-    function timelineProgress(){
-      const r = processSec.getBoundingClientRect();
-      const view = Math.min(1, Math.max(0, (innerHeight - r.top) / (r.height + innerHeight*0.2)));
-      fill.style.width = (view * 100) + '%';
-    }
-    addEventListener('scroll', timelineProgress); timelineProgress();
+    const PRODUCTS = [
+      // Electronics
+      {id:'p1', slug:'wireless-earbuds', title:'RSway Air Wireless Earbuds', category:'electronics', brand:'RSway', price:1999, was:2499, rating:4.6, reviews:125, sku:'RS-AIR-01', stock:18, weight:0.1,
+        colors:['Black','White'], sizes:[], images:[
+          'https://images.unsplash.com/photo-1585386959984-a4155223165b?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=1200&auto=format&fit=crop'
+        ],
+        specs:{Connectivity:'Bluetooth 5.3', Battery:'24h with case', Warranty:'6 Months'} },
+      {id:'p2', slug:'smartwatch-neo', title:'Smartwatch Neo', category:'electronics', brand:'NeoTech', price:3499, was:3999, rating:4.2, reviews:84, sku:'NEO-SW-100', stock:12,
+        colors:['Black','Blue'], images:[
+          'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=1200&auto=format&fit=crop'
+        ], specs:{Display:'AMOLED', GPS:'Yes', Warranty:'1 Year'}},
+      {id:'p3', slug:'noise-cancelling-headphone', title:'ZX Noise Cancelling Headphone', category:'electronics', brand:'ZenX', price:5990, was:6990, rating:4.7, reviews:201, sku:'ZX-H900', stock:9,
+        colors:['Black'], images:['https://images.unsplash.com/photo-1518446005430-4d3f21aa83ba?q=80&w=1200&auto=format&fit=crop'],
+        specs:{ANC:'Hybrid', Battery:'30h', Charge:'USB-C'}},
 
-    // Particles
-    const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
-    let W,H,DPR,stars=[], mx=innerWidth/2, my=innerHeight/2;
-    function resize(){
-      DPR = Math.min(devicePixelRatio||1, 2);
-      W = canvas.width = innerWidth * DPR; H = canvas.height = innerHeight * DPR;
-      canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
-      const count = Math.min(220, Math.floor((innerWidth*innerHeight)/9000));
-      stars = new Array(count).fill(0).map(()=>({x:Math.random()*W, y:Math.random()*H, z:Math.random()*0.9+0.1, vx:(Math.random()-.5)*.15, vy:(Math.random()-.5)*.15, r:Math.random()*1.6+.4}));
-    }
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      for(const s of stars){
-        const parX = (mx*DPR - W/2) * (s.z-0.5)*0.006, parY = (my*DPR - H/2) * (s.z-0.5)*0.006;
-        let x = s.x + parX, y = s.y + parY;
-        s.x += s.vx; s.y += s.vy;
-        if(s.x<0) s.x=W; if(s.x>W) s.x=0; if(s.y<0) s.y=H; if(s.y>H) s.y=0;
-        const g = ctx.createRadialGradient(x,y,0,x,y,s.r*5);
-        g.addColorStop(0,`rgba(255,255,255,${0.9*s.z})`); g.addColorStop(1,`rgba(255,255,255,0)`);
-        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,s.r,0,Math.PI*2); ctx.fill();
-      }
-      requestAnimationFrame(draw);
-    }
-    resize(); draw(); addEventListener('resize', resize); addEventListener('pointermove', e=> { mx=e.clientX; my=e.clientY; });
+      // Fashion
+      {id:'p4', slug:'classic-tee', title:'Classic Cotton Tee', category:'fashion', brand:'RS Basics', price:699, was:899, rating:4.4, reviews:56, sku:'RS-TEE-CL', stock:40,
+        colors:['White','Black','Blue'], sizes:['S','M','L','XL'], images:['https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop'], specs:{Material:'100% Cotton'}},
+      {id:'p5', slug:'denim-jacket', title:'Denim Jacket', category:'fashion', brand:'DenimHub', price:2490, was:2990, rating:4.3, reviews:33, sku:'DNM-JKT-01', stock:25, colors:['Blue'], sizes:['M','L','XL'],
+        images:['https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1200&auto=format&fit=crop'], specs:{Material:'Denim'}},
 
-    function sendMail(e) {
-  e.preventDefault();
+      // Home & Living
+      {id:'p6', slug:'ceramic-planter', title:'Ceramic Planter Pot', category:'home-living', brand:'HomeLeaf', price:590, was:790, rating:4.5, reviews:77, sku:'HL-POT-01', stock:50,
+        colors:['White'], images:['https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?q=80&w=1200&auto=format&fit=crop'], specs:{Size:'6 inch'}},
+      {id:'p7', slug:'led-table-lamp', title:'LED Table Lamp', category:'home-living', brand:'LiteUp', price:1290, was:1590, rating:4.1, reviews:41, sku:'LIT-LAMP-22', stock:32,
+        colors:['Black','White'], images:['https://images.unsplash.com/photo-1545153996-5f6d4d04b8bb?q=80&w=1200&auto=format&fit=crop'], specs:{Power:'6W'}},
 
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let subject = document.getElementById("subject").value;
-  let message = document.getElementById("message").value;
+      // Beauty
+      {id:'p8', slug:'matte-lipstick', title:'Velvet Matte Lipstick', category:'beauty', brand:'GlowUp', price:490, was:690, rating:4.0, reviews:63, sku:'GU-LIP-11', stock:80,
+        colors:['Ruby Red','Nude'], images:['https://images.unsplash.com/photo-1512203492609-8f5f4a0c3d45?q=80&w=1200&auto=format&fit=crop'], specs:{Finish:'Matte'}},
+      {id:'p9', slug:'face-serum', title:'Vitamin C Face Serum 30ml', category:'beauty', brand:'DermaLab', price:990, was:1290, rating:4.6, reviews:104, sku:'DL-SERUM-VC', stock:36,
+        colors:[], images:['https://images.unsplash.com/photo-1585386959984-95c342b0c47b?q=80&w=1200&auto=format&fit=crop'], specs:{VitaminC:'10%'}},
 
-  let mailtoLink =
-    "https://mail.google.com/mail/?view=cm&fs=1" +
-    "&to=support@bridgebytetech.com" + 
-    "&su=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(
-      "Name: " + name + "\n" +
-      "Email: " + email + "\n\n" +
-      message
-    );
-
-  window.open(mailtoLink, "_blank"); // Gmail নতুন ট্যাবে খুলবে
-}
-
-type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Bridge Byte Tech",
-  "url": "https://www.bridgebytetech.com",
-  "logo": "https://www.bridgebytetech.com/logo.jpg",
-  "sameAs": [
-    "https://www.facebook.com/bridgebytetech",
-    "https://www.linkedin.com/company/bridgebytetech",
-    "https://twitter.com/bridgebytetech"
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+8801XXXXXXXXX",
-    "contactType": "customer service",
-    "areaServed": "BD",
-    "availableLanguage": ["en","bn"]
-  }
-}
-</script>
-
-  </script>
-</body>
-
-</html>
-
-
-
-
-
-
+      // Sports
+      {id:'p10', slug:'running-shoes', title:'AeroRun Running Shoes', category:'sports', brand:'Aero', price:2890, was:3290, rating:4.3, reviews:58, sku:'AR-RUN-3', stock:20,
+        colors:['Black','Gray'], sizes:['40','41','42','43'], 

@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sylhetpedia | Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for Sylhetpedia App" />
+  <meta name="theme-color" content="#0b1f3a" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ------- একই CSS ডিজাইন যেটা Terms-এ ছিল -------*/
+ :root{
+      /* Brand palette */
+      --brand-900: #0b1f3a;  /* dark blue */
+      --brand-700: #123a6a;
+      --brand-600: #14509a;
+      --sky-500: #38bdf8;   /* sky blue */
+      --sky-600: #0ea5e9;
+
+      /* Neutrals */
+      --bg: #f5f8fc;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --border: #e2e8f0;
+
+      /* UI */
+      --radius: 16px;
+      --shadow-1: 0 6px 20px rgba(2, 6, 23, 0.08);
+      --shadow-2: 0 12px 40px rgba(2, 6, 23, 0.12);
+    }
+
+    *,*::before,*::after{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at -15% -20%, rgba(56,189,248,.25), transparent 60%),
+        radial-gradient(1000px 500px at 115% -10%, rgba(14,165,233,.20), transparent 60%),
+        linear-gradient(180deg, #ffffff, var(--bg));
+    }
+
+    /* Container */
+    .container{ width:min(1100px, 92%); margin-inline:auto; }
+
+    /* Top notice / skip link */
+    .skip-link{
+      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      position:fixed; left:16px; top:16px; width:auto; height:auto; padding:10px 14px;
+      background:#fff; color:var(--brand-900); border:1px solid var(--border); border-radius:8px; z-index:9999;
+      box-shadow: var(--shadow-1);
+    }
+
+    /* Navbar */
+    .nav{
+      position: sticky; top:0; z-index:100;
+      backdrop-filter: saturate(180%) blur(10px);
+      background: linear-gradient(90deg, rgba(11,31,58,.85), rgba(56,189,248,.20));
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; color:#fff; text-decoration:none;
+    }
+    .logo{
+      width:38px; height:38px; display:grid; place-items:center; border-radius:10px;
+      background: conic-gradient(from -40deg, var(--sky-500), var(--brand-900) 55%, var(--sky-600) 90%);
+      box-shadow: 0 6px 18px rgba(56,189,248,.25), inset 0 0 0 1px rgba(255,255,255,.15);
+      color:#fff; font-weight:800; letter-spacing:.5px; font-size:14px;
+    }
+    .brand-name{
+      font-weight:800; font-size:18px; letter-spacing:.2px;
+      background: linear-gradient(90deg, #fff, #dbeafe);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .nav-links{
+      display:flex; gap:22px; align-items:center;
+    }
+    .nav-links a{
+      color:#e6f1ff; text-decoration:none; font-weight:500; font-size:14.5px; opacity:.95;
+    }
+    .nav-links a:hover{ color:#ffffff; text-decoration:underline; text-underline-offset:4px; }
+
+    .cta{
+      padding:10px 14px; border-radius:12px;
+      background: linear-gradient(90deg, var(--sky-600), var(--sky-500));
+      color:#06223f; font-weight:700; text-decoration:none;
+      box-shadow: 0 8px 18px rgba(14,165,233,.25);
+      border: 1px solid rgba(255,255,255,.3);
+    }
+    .cta:hover{ filter: brightness(1.05); }
+
+    /* Hero */
+    .hero{
+      position:relative; overflow:hidden;
+      background: linear-gradient(120deg, var(--brand-900), #104a97 55%, var(--sky-600));
+      color:#fff;
+      padding: 64px 0 26px;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+    }
+    .hero::after{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(500px 220px at 20% 15%, rgba(255,255,255,.15), transparent 60%),
+        radial-gradient(600px 260px at 80% 10%, rgba(255,255,255,.12), transparent 60%),
+        radial-gradient(1200px 400px at 50% -15%, rgba(56,189,248,.15), transparent 60%);
+      pointer-events:none;
+    }
+    .crumbs{
+      position:relative; z-index:1; color:#dbeafe; font-size:13px; opacity:.95; margin-bottom:14px;
+    }
+    .crumbs a{ color:#fff; text-decoration:none; }
+    .crumbs a:hover{ text-decoration:underline; text-underline-offset:3px; }
+    .hero-head{
+      position:relative; z-index:1;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      color:#e6f1ff; font-weight:600; font-size:12.5px; letter-spacing:.2px;
+      margin-bottom:10px;
+      backdrop-filter: blur(6px);
+    }
+    .pill .dot{
+      width:8px; height:8px; border-radius:999px; background: #a7f3d0;
+      box-shadow: 0 0 0 3px rgba(167,243,208,.15);
+    }
+    .hero h1{
+      margin: 4px 0 10px;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height:1.15; font-weight:800;
+      letter-spacing:.2px;
+    }
+    .hero p{
+      color:#e2ecff; font-size: clamp(14px, 2.2vw, 16.5px); max-width: 780px; opacity:.95;
+      margin: 0 0 18px;
+    }
+    .meta{
+      display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.2);
+      color:#f0f7ff; padding:8px 12px; border-radius:12px; font-size:13px; font-weight:600;
+    }
+    .badge .b-dot{ width:6px; height:6px; border-radius:99px; background:#38bdf8; box-shadow:0 0 0 3px rgba(56,189,248,.2); }
+
+    /* Highlights */
+    .highlights{
+      position:relative; z-index:1; margin-top: 22px; margin-bottom: 18px;
+    }
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+    }
+    .card{
+      background: rgba(255,255,255,.9);
+      border:1px solid rgba(255,255,255,.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      padding:16px;
+      backdrop-filter: saturate(160%) blur(6px);
+    }
+    .card h4{ margin:0 0 6px; font-size:15px; color:#0b2545; }
+    .card p{ margin:0; color:#445169; font-size:13.5px; line-height:1.55; }
+    .icon{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+      background: linear-gradient(120deg, rgba(56,189,248,.18), rgba(255,255,255,.6));
+      border:1px solid rgba(56,189,248,.35);
+      color:#0b2850; font-weight:800; font-size:14px; margin-bottom:10px;
+    }
+
+    /* Content layout */
+    .content-wrap{
+      padding: 22px 0 72px;
+    }
+    .layout{
+      display:grid; gap:22px; grid-template-columns: 280px 1fr;
+      align-items:start;
+    }
+    .toc{
+      position: sticky; top: 84px;
+    }
+    .toc .toc-card{
+      background: #fff; border:1px solid var(--border); border-radius: 14px;
+      padding:16px; box-shadow: var(--shadow-1);
+    }
+    .toc h3{
+      margin:0 0 8px; font-size:13px; letter-spacing:.25px; color:#0b2a53; text-transform:uppercase;
+    }
+    .toc ul{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+    .toc a{
+      display:flex; gap:10px; align-items:center; text-decoration:none;
+      color:#21314d; font-size:14px; padding:8px 10px; border-radius:10px; border:1px solid transparent;
+    }
+    .toc a .bar{ width:6px; height:6px; border-radius:8px; background: #93c5fd; }
+    .toc a:hover{ background:#f1f6ff; border-color:#dbeafe; color:#0a2a50; }
+
+    article.policy{
+      background:#fff; border:1px solid var(--border); border-radius:16px; box-shadow: var(--shadow-2);
+      overflow:hidden;
+    }
+    .policy-header{
+      padding:22px 20px; border-bottom:1px solid var(--border);
+      display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+      background: linear-gradient(0deg, #ffffff, #f7fbff);
+    }
+    .policy-header .title{
+      display:flex; align-items:flex-start; gap:12px;
+    }
+    .policy-header .title .marker{
+      width:9px; height:36px; border-radius:6px;
+      background: linear-gradient(180deg, var(--sky-600), var(--brand-600));
+      box-shadow: 0 0 0 3px rgba(56,189,248,.15);
+    }
+    .policy-header h2{ margin:0; font-size:20px; color:#0b2545; }
+    .policy-header small{ color:#5b677d; }
+    .policy-body{ padding: 8px 22px 24px; }
+    .section{
+      padding:18px 0 10px; border-bottom:1px dashed #e6edf7;
+    }
+    .section:last-child{ border-bottom:0; padding-bottom:0; }
+    .section h3{
+      margin:0 0 8px; font-size:18px; color:#0b2545;
+    }
+    .lead{
+      margin:6px 0 14px; color:#445169; font-size:15px;
+    }
+    .section ul{ margin:10px 0 6px 20px; color:#334155; }
+    .section li{ margin:6px 0; }
+    .callout{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:12px 14px; background:#f0f9ff; border:1px solid #dbeafe; border-radius:12px;
+      color:#06365b; font-size:14px; margin:12px 0;
+    }
+    .callout strong{ color:#06223f; }
+    .note{
+      background:#f8fafc; border:1px dashed #e2e8f0; color:#334155;
+    }
+
+    /* Footer */
+    footer{
+      padding: 28px 0 50px; background:#061a33; color:#cfe7ff; border-top:1px solid rgba(255,255,255,.08);
+      margin-top: 28px;
+    }
+    .footer-grid{
+      display:grid; gap:22px; grid-template-columns: 1.2fr 1fr 1fr;
+    }
+    .footer-brand{
+      display:flex; align-items:center; gap:12px; color:#fff; text-decoration:none; margin-bottom:8px;
+    }
+    .footer-brand .logo{ box-shadow:none; }
+    .footer small{ color:#bcd7f8; }
+    .f-links a{
+      display:block; color:#e6f1ff; text-decoration:none; margin:6px 0; font-size:14px; opacity:.95;
+    }
+    .f-links a:hover{ text-decoration:underline; text-underline-offset:4px; }
+    .copyright{
+      margin-top:18px; font-size:13px; color:#cde4ff;
+      border-top:1px solid rgba(255,255,255,.12); padding-top:14px;
+    }
+
+    /* Utilities */
+    .space-s{ height: 10px; }
+    .space-m{ height: 18px; }
+    .space-l{ height: 26px; }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .layout{ grid-template-columns: 1fr; }
+      .toc{ position:relative; top:auto; }
+    }
+    @media (max-width: 640px){
+      .nav-links{ display:none; }
+      .grid{ grid-template-columns: 1fr; }
+      .policy-header{ padding:16px 14px; }
+      .policy-body{ padding: 6px 14px 18px; }
+      .toc .toc-card{ padding:12px; }
+      .badge{ font-size:12px; }
+      .cta{ padding:9px 12px; border-radius:10px; }
+      .footer-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <h1>Privacy Policy</h1>
+      <p>How Sylhetpedia collects, uses, stores, and protects your data. Please review carefully.</p>
+      <p><strong>Effective Date:</strong> February 15, 2024</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="content-wrap">
+    <div class="container layout">
+
+      <!-- TOC -->
+      <aside class="toc">
+        <div class="toc-card">
+          <h3>On this page</h3>
+          <ul>
+            <li><a href="#collect">1. Information We Collect</a></li>
+            <li><a href="#use">2. How We Use Data</a></li>
+            <li><a href="#storage">3. Data Storage & Security</a></li>
+            <li><a href="#sharing">4. Data Sharing</a></li>
+            <li><a href="#cookies">5. Cookies & Tracking</a></li>
+            <li><a href="#rights">6. Your Rights & Consent</a></li>
+            <li><a href="#children">7. Children’s Privacy</a></li>
+            <li><a href="#changes">8. Changes</a></li>
+            <li><a href="#contact">9. Contact Us</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Policy Text -->
+      <article class="policy">
+        <div class="policy-header">
+          <h2>Sylhetpedia Privacy Policy</h2>
+        </div>
+        <div class="policy-body">
+
+          <section id="collect" class="section">
+            <h3>1. Information We Collect</h3>
+            <ul>
+              <li><strong>Personal Information:</strong> email, username, login credentials.</li>
+              <li><strong>User Content:</strong> posts related to blood donation, lost & found, rentals, tuitions.</li>
+              <li><strong>App Usage Data:</strong> chatbot queries, usage logs, activity interactions.</li>
+              <li><strong>Device Info:</strong> device model, OS, IP, app version, crash reports.</li>
+              <li><em>Note: Blood donation posts are user generated and informational. Sensitive health data is not processed by Sylhetpedia.</em></li>
+            </ul>
+          </section>
+
+          <section id="use" class="section">
+            <h3>2. How We Use Data</h3>
+            <ul>
+              <li>Manage user accounts (login, reset, delete).</li>
+              <li>Moderate and display approved posts.</li>
+              <li>Provide chatbot responses and features.</li>
+              <li>Send notifications & alerts.</li>
+              <li>Maintain, improve, and secure the App.</li>
+            </ul>
+          </section>
+
+          <section id="storage" class="section">
+            <h3>3. Data Storage & Security</h3>
+            <p>Data is securely stored with restricted database access. Retention lasts while your account is active or as legally required. Encryption & safeguards prevent unauthorized access.</p>
+          </section>
+
+          <section id="sharing" class="section">
+            <h3>4. Data Sharing</h3>
+            <p>We do not sell your data. Sharing occurs only with:</p>
+            <ul>
+              <li>Service providers (e.g., Google Firebase for analytics, crash reporting, push notifications).</li>
+              <li>Ad networks (e.g., Google AdMob) that may collect identifiers for personalized ads.</li>
+            </ul>
+          </section>
+
+          <section id="cookies" class="section">
+            <h3>5. Cookies & Tracking</h3>
+            <p>The App or partners may use cookies or similar tools for analytics and ads. By using the App, you consent to these practices.</p>
+          </section>
+
+          <section id="rights" class="section">
+            <h3>6. Your Rights & Consent</h3>
+            <p>You may access, correct, or delete your data at any time, or remove your account through the App. Requests can also be made by email.</p>
+            <p>By creating an account or using Sylhetpedia, you accept this Privacy Policy and also our <a href="terms.html">Terms & Conditions</a>.</p>
+          </section>
+
+          <section id="children" class="section">
+            <h3>7. Children’s Privacy</h3>
+            <p>Sylhetpedia is not intended for children under 13, and no data is knowingly collected from them.</p>
+          </section>
+
+          <section id="changes" class="section">
+            <h3>8. Changes</h3>
+            <p>This Privacy Policy may be updated. The latest version will always be available in-app and in the Play Store listing. Continued use means agreement.</p>
+          </section>
+
+          <section id="contact" class="section">
+            <h3>9. Contact Us</h3>
+            <ul>
+              <li><strong>Email:</strong> <a href="mailto:sylhetpedia@bridgebytetech.com">sylhetpedia@bridgebytetech.com</a></li>
+              <li><strong>Website:</strong> <a href="https://www.bridgebytetech.com/" target="_blank">https://www.bridgebytetech.com/</a></li>
+            </ul>
+          </section>
+
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <a href="/" class="footer-brand"><div class="logo">SP</div> Sylhetpedia</a>
+      <div class="footer-grid">
+        <div><small>We respect and protect user privacy for the Sylhet community.</small></div>
+        <div>
+          <strong>Legal</strong>
+          <div><a href="terms.html">Terms & Conditions</a></div>
+          <div><a href="privacy.html">Privacy Policy</a></div>
+        </div>
+        <div>
+          <strong>Support</strong>
+          <div><a href="mailto:sylhetpedia@bridgebytetech.com">Email Us</a></div>
+          <div><a href="https://www.bridgebytetech.com/">Website</a></div>
+        </div>
+      </div>
+      <div class="copyright">
+        © <span id="year"></span> Sylhetpedia • Built by BridgeByte Tech
+      </div>
+    </div>
+    <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

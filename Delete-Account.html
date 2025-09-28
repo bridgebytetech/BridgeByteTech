@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sylhetpedia | Delete Account</title>
+  <meta name="description" content="How to permanently delete your Sylhetpedia account" />
+  <meta name="theme-color" content="#0b1f3a" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand-900: #0b1f3a;
+      --brand-700: #123a6a;
+      --brand-600: #14509a;
+      --sky-500: #38bdf8;
+      --sky-600: #0ea5e9;
+      --bg: #f5f8fc;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --radius: 16px;
+      --shadow-1: 0 6px 20px rgba(2, 6, 23, 0.08);
+      --shadow-2: 0 12px 40px rgba(2, 6, 23, 0.12);
+    }
+    *,*::before,*::after{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: Inter, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at -15% -20%, rgba(56,189,248,.25), transparent 60%),
+        radial-gradient(1000px 500px at 115% -10%, rgba(14,165,233,.20), transparent 60%),
+        linear-gradient(180deg, #ffffff, var(--bg));
+    }
+    .container{ width:min(1000px, 92%); margin:auto; }
+    header.hero{
+      background: linear-gradient(120deg, var(--brand-900), #104a97 60%, var(--sky-600));
+      padding:60px 0 40px; color:#fff; position:relative; text-align:center;
+    }
+    header.hero h1{
+      font-size:clamp(30px,6vw,44px); font-weight:800; margin:0 0 12px; 
+    }
+    header.hero p{ max-width:680px; margin:0 auto 10px; font-size:16.5px; opacity:.95; }
+    main{ padding:40px 0 60px; }
+    article{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow-2);
+      padding:30px;
+    }
+    article h2{ margin-top:0; color:var(--brand-900); font-size:22px; font-weight:700; }
+    .steps{ list-style:none; padding:0; margin:20px 0; }
+    .steps li{
+      position:relative;
+      margin:14px 0; 
+      padding:16px 18px;
+      border:1px solid #dbeafe;
+      border-radius:14px;
+      background:#f9fbff;
+      box-shadow: var(--shadow-1);
+      font-size:15px;
+    }
+    .steps li::before{
+      content:"✓";
+      position:absolute;
+      top:16px; left:-32px;
+      width:22px; height:22px;
+      border-radius:50%;
+      background: linear-gradient(135deg,var(--sky-600),var(--sky-500));
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size:13px; font-weight:bold;
+      box-shadow:0 4px 12px rgba(14,165,233,.35);
+    }
+    .callout{
+      margin:22px 0;
+      padding:16px 18px;
+      background:#fff8f2;
+      border:1px solid #ffedd5;
+      border-radius:14px;
+      color:#92400e;
+      box-shadow: var(--shadow-1);
+      font-size:14.5px;
+    }
+    .support{
+      margin-top:28px;
+      padding:18px 20px;
+      border:1px dashed var(--border);
+      border-radius:14px;
+      background:#f8fafc;
+      font-size:15px;
+    }
+    .support a{
+      color:var(--sky-600); text-decoration:none; font-weight:600;
+    }
+    .support a:hover{ text-decoration:underline; }
+    footer{
+      margin-top:40px; background:#061a33; color:#cfe7ff; text-align:center;
+      padding:30px 20px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    footer small{ color:#bcd7f8; }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <h1>Delete Your Sylhetpedia Account</h1>
+      <p>We believe in giving you full control over your data. Here’s how to permanently remove your account and personal information.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article>
+        <h2>Steps to Delete Your Account</h2>
+        <ol class="steps">
+          <li>Open the <strong>Sylhetpedia</strong> app.</li>
+          <li>Tap the hamburger menu (<strong>☰</strong>) in the top-left corner.</li>
+          <li>Scroll down and tap on <em>“Delete Account”</em> (just below “Logout”).</li>
+          <li>Confirm your choice when prompted.</li>
+        </ol>
+
+        <div class="callout">
+          ⚠️ <strong>Important:</strong> Once you confirm, your account and all associated data will be permanently deleted and <u>cannot</u> be recovered.
+        </div>
+
+        <div class="support">
+          <p><strong>Need help?</strong></p>
+          <p>If you face any issues, feel free to reach out to us:</p>
+          <p>📧 <a href="mailto:sylhetpedia@bridgebytetech.com">sylhetpedia@bridgebytetech.com</a></p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <small>© <span id="year"></span> Sylhetpedia • Built with ❤️ by BridgeByte Tech</small>
+  </footer>
+
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
